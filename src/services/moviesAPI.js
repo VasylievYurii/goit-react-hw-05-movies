@@ -22,7 +22,7 @@ const MOVIES_API = {
   nowPlaying: '/movie/now_playing',
 };
 
-const getTrendingMovieList = async () => {
+const getTrendingMoviesList = async () => {
   try {
     const result = await axios.get(MOVIES_API.trending, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -109,7 +109,7 @@ const getMoviesByGenre = async genre => {
 
 const useMoviesApi = () => {
   return {
-    getTrendingMovieList,
+    getTrendingMoviesList,
     getGenres,
     getMoviesByGenre,
     getMoviesSearch,

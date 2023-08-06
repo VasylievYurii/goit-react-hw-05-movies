@@ -2,6 +2,8 @@ import {
   CardWrapper,
   ImgWrapper,
   Poster,
+  RatingWrap,
+  Star,
   Rating,
   Type,
   Title,
@@ -13,7 +15,10 @@ function Card({ title, poster, type, rating, date }) {
     <CardWrapper>
       <ImgWrapper>
         <Poster src={`http://image.tmdb.org/t/p/w200${poster}`} alt={title} />
-        <Rating>{rating.toFixed(1)}</Rating>
+        <RatingWrap>
+          <Star />
+          <Rating>{rating.toFixed(1)}</Rating>
+        </RatingWrap>
         <Type colorType={type}>{type}</Type>
       </ImgWrapper>
       <Title>{title}</Title>

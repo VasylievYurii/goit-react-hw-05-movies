@@ -18,7 +18,6 @@ function Upcoming() {
       .getUpcomingList()
       .then(({ results }) => {
         setUpcomingList(results);
-        console.log('res', results);
       })
       .catch(err => {
         setError(true);
@@ -31,8 +30,6 @@ function Upcoming() {
 
   useEffect(() => {
     const poster = getRandomFromArray(UpcomingList);
-    console.log('UpcomingList:', UpcomingList);
-    console.log('poster:', poster);
     setRandomPoster(poster);
   }, [UpcomingList]);
 

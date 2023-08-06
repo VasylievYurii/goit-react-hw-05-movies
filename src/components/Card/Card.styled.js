@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+import { BsFillStarFill } from 'react-icons/bs';
 
 const setTypeColor = ({ colorType }) =>
-  colorType === 'movie' ? 'blue' : 'green';
+  colorType === 'movie' ? 'rgba(68,119,206,0.8)' : 'rgba(234,17,121,0.8)';
 
 export const CardWrapper = styled(Link)`
   width: 200px;
@@ -19,16 +20,29 @@ export const Poster = styled.img`
   width: 100%;
 `;
 
-export const Rating = styled.p`
+export const RatingWrap = styled.div`
   position: absolute;
   top: 5px;
   left: 5px;
-  font-size: 14px;
+  width: 32px;
+  height: 32px;
+`;
+
+export const Star = styled(BsFillStarFill)`
+  width: 100%;
+  height: 100%;
+  fill: orange;
+  opacity: 85%;
+`;
+
+export const Rating = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+  font-size: 10px;
   font-weight: 600;
-  color: black;
-  background-color: gold;
-  border: 5px solid gold;
-  border-radius: 50%;
+  color: white;
 `;
 
 export const Type = styled.p`
