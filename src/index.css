@@ -70,3 +70,19 @@ a {
 li {
   list-style: none;
 }
+.swiper {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
