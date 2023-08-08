@@ -8,19 +8,26 @@ import Layout from '../Layout/Layout';
 import TvDetails from 'pages/TvDetails/TvDetails';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
+import CastTv from 'components/CastTv/CastTv';
+import ReviewsTv from 'components/ReviewsTv/ReviewsTv';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
+
         <Route path="tvshows" element={<TvShows />} />
-        <Route path="tv/:movieId" element={<TvDetails />} />
+        <Route path="tv/:movieId" element={<TvDetails />}>
+          <Route path="cast" element={<CastTv />} />
+          <Route path="reviews" element={<ReviewsTv />} />
+        </Route>
         <Route path="actors" element={<Actors />} />
       </Route>
     </Routes>

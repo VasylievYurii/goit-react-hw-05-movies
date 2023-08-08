@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useMoviesDetailsApi from 'services/moviesDetailsAPI';
+import useTvDetailsApi from 'services/tvDetailsAPI';
 import {
   ActorsWrap,
   ActorWrapper,
@@ -9,16 +9,16 @@ import {
   NoPhoto,
   Name,
   Character,
-} from './Cast.styled';
+} from './CastTv.styled';
 
-function Cast() {
+function CastTv() {
   const [cast, setCast] = useState(null);
   const { movieId } = useParams();
-  const metodsForMovieDetails = useMoviesDetailsApi();
+  const metodsForMovieDetails = useTvDetailsApi();
 
   useEffect(() => {
     metodsForMovieDetails
-      .getMoviesCast(movieId)
+      .getTvCast(movieId)
       .then(({ cast }) => {
         setCast(cast);
       })
@@ -53,4 +53,4 @@ function Cast() {
     </ActorsWrap>
   );
 }
-export default Cast;
+export default CastTv;

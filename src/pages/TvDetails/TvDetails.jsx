@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams, Link } from 'react-router-dom';
 import {
   Section,
   Container,
@@ -15,9 +15,10 @@ import {
   NumberOfSeasons,
   NumberOfEpisodes,
   Genre,
-  Runtime,
+  LinksWrap,
   Overview,
 } from './TvDetails.styled';
+import Button from 'components/Button/Button';
 import useTvDetailsApi from 'services/tvDetailsAPI';
 
 function TvDetails() {
@@ -29,7 +30,7 @@ function TvDetails() {
     metodsForTvDetails
       .getTvDetails(movieId)
       .then(res => {
-        console.log('tvres:', res);
+        console.log('res:', res);
         setTv(res);
       })
       .catch(err => {
@@ -46,14 +47,15 @@ function TvDetails() {
     <>
       <Section>
         <Container>
-          <div>Go Back</div>
-
-          <Title>{tv.name}</Title>
+          <Link to="#">
+            <Button>Go Back</Button>
+          </Link>
+          <Title>{tv?.name}</Title>
           <MainWrapper>
             <ImageWrapper>
               <Poster
                 src={`http://image.tmdb.org/t/p/w300${tv['poster_path']}`}
-                alt={tv.name}
+                alt={tv?.name}
               />
             </ImageWrapper>
             <MovieDetailsWrapper>
@@ -63,28 +65,35 @@ function TvDetails() {
               </FirstRelease>
               <LastRelease>Last air date: {tv['last_air_date']}</LastRelease>
               <NumberOfSeasons>
-                Number of seasons: {tv.number_of_seasons}
+                Number of seasons: {tv?.number_of_seasons}
               </NumberOfSeasons>
               <NumberOfEpisodes>
-                Number of episodes: {tv.number_of_episodes}
+                Number of episodes: {tv?.number_of_episodes}
               </NumberOfEpisodes>
-              <Country>Country: {tv['production_countries'][0].name}</Country>
+              <Country>Country: {tv['origin_country'][0]}</Country>
 
-              <Genre>Genres: {tv['genres'][0].name}</Genre>
+              <Genre>Genres: {tv['genres'][0]?.name}</Genre>
 
-              <Overview>{tv.overview}</Overview>
+              <Overview>{tv?.overview}</Overview>
             </MovieDetailsWrapper>
           </MainWrapper>
         </Container>
       </Section>
       <Section>
         <Container>
-          <div>Cast</div>
-        </Container>
-      </Section>
-      <Section>
-        <Container>
-          <div>Reviews</div>
+          <LinksWrap>
+            <li>
+              <Link to="cast">
+                <Button>Cast</Button>
+              </Link>
+            </li>
+            <li>
+              <Link to="reviews">
+                <Button>Reviews</Button>
+              </Link>
+            </li>
+          </LinksWrap>
+          <Outlet />
         </Container>
       </Section>
     </>

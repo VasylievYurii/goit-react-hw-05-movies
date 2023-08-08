@@ -58,8 +58,8 @@ export const Menu = styled.ul`
 
 export const List = styled(NavLink)`
   color: #fff;
-  &:active {
-    color: orange;
+  &.active {
+    color: #fe6d31;
   }
 `;
 

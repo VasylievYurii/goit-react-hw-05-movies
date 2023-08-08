@@ -56,6 +56,12 @@ export const AuthorRating = styled.p`
 export const ReviewText = styled.p`
   font-size: 12px;
   line-height: 1.6;
+  background-color: linear-gradient(
+    to right,
+    #232526 0%,
+    #414345 51%,
+    #232526 100%
+  );
   padding: 30px;
   padding-left: 20px;
   border-radius: 20px;

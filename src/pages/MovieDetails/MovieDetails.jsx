@@ -16,8 +16,10 @@ import {
   Genre,
   Runtime,
   Overview,
+  LinksWrap,
 } from './MovieDetails.styled';
 import useMoviesDetailsApi from 'services/moviesDetailsAPI';
+import Button from 'components/Button/Button';
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
@@ -44,44 +46,47 @@ function MovieDetails() {
     <>
       <Section>
         <Container>
-          <div>Go Back</div>
+          <Link to="#">
+            <Button>Go Back</Button>
+          </Link>
           <Title>{movie?.title}</Title>
-          <Tagline>{movie.tagline}</Tagline>
+          <Tagline>{movie?.tagline}</Tagline>
           <MainWrapper>
             <ImageWrapper>
               <Poster
                 src={`http://image.tmdb.org/t/p/w300${movie['poster_path']}`}
-                alt={movie.title}
+                alt={movie?.title}
               />
             </ImageWrapper>
             <MovieDetailsWrapper>
               <Rating>Rating: {movie['vote_average']}</Rating>
               <Release>Release: {movie['release_date']}</Release>
               <Country>
-                Country: {movie['production_countries'][0].name}
+                Country: {movie['production_countries'][0]?.name}
               </Country>
-              <Budget>Budget: {movie.budget}</Budget>
-              <Genre>Genres: {movie['genres'][0].name}</Genre>
-              <Runtime>Runtime: {movie.runtime}</Runtime>
-              <Overview>{movie.overview}</Overview>
+              {movie.budget ? <Budget>Budget: {movie.budget}</Budget> : null}
+
+              <Genre>Genres: {movie['genres'][0]?.name}</Genre>
+              <Runtime>Runtime: {movie?.runtime} min</Runtime>
+              <Overview>{movie?.overview}</Overview>
             </MovieDetailsWrapper>
           </MainWrapper>
         </Container>
       </Section>
       <Section>
         <Container>
-          <ul>
+          <LinksWrap>
             <li>
-              <h3>
-                <Link to="cast">Cast</Link>
-              </h3>
+              <Link to="cast">
+                <Button>Cast</Button>
+              </Link>
             </li>
             <li>
-              <h3>
-                <Link to="reviews">Reviews</Link>
-              </h3>
+              <Link to="reviews">
+                <Button>Reviews</Button>
+              </Link>
             </li>
-          </ul>
+          </LinksWrap>
           <Outlet />
         </Container>
       </Section>

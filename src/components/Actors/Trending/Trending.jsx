@@ -14,7 +14,6 @@ function Trending() {
     itemsForTrending
       .getTrendingActorsList()
       .then(({ results }) => {
-        console.log('results:', results);
         setArray(results);
       })
       .catch(err => {

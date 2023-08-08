@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useMoviesDetailsApi from 'services/moviesDetailsAPI';
+import useTvDetailsApi from 'services/tvDetailsAPI';
 import {
   Wrapper,
   ReviewsWrap,
@@ -11,16 +11,16 @@ import {
   AuthorName,
   AuthorRating,
   ReviewText,
-} from './Reviews.styled';
+} from './ReviewsTv.styled';
 
-function Reviews() {
+function ReviewsTv() {
   const [reviews, setReviews] = useState(null);
   const { movieId } = useParams();
-  const metodsForMovieDetails = useMoviesDetailsApi();
+  const metodsForMovieDetails = useTvDetailsApi();
 
   useEffect(() => {
     metodsForMovieDetails
-      .getMoviesReviews(movieId)
+      .getTvReviews(movieId)
       .then(({ results }) => {
         setReviews(results);
       })
@@ -61,4 +61,4 @@ function Reviews() {
     </Wrapper>
   );
 }
-export default Reviews;
+export default ReviewsTv;

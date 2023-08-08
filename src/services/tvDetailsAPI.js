@@ -9,7 +9,6 @@ axios.defaults.baseURL = API_BASE_URL;
 // Reviews         https://api.themoviedb.org/3/tv/               {series_id}/reviews
 
 const getTvDetails = async series_id => {
-  // console.log('series_id:', series_id);
   try {
     const result = await axios.get(`/tv/${series_id}`, {
       params: { api_key: API_KEY },
