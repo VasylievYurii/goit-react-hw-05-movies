@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BsFillStarFill } from 'react-icons/bs';
 
 const setTypeColor = ({ colorType }) =>
   colorType === 'movie' ? 'rgba(68,119,206,0.8)' : 'rgba(234,17,121,0.8)';
 
-export const CardWrapper = styled(Link)`
+export const CardWrapper = styled(NavLink)`
   width: 200px;
   display: flex;
   flex-direction: column;

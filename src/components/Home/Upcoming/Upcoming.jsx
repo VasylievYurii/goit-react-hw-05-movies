@@ -93,7 +93,7 @@ function Upcoming() {
         >
           {UpcomingList.map(movie => (
             <SwiperSlide key={movie.id}>
-              <Link>
+              <Link to={`/movies/${movie.id}`}>
                 <img
                   src={`http://image.tmdb.org/t/p/w300${movie['poster_path']}`}
                   alt={movie.title}

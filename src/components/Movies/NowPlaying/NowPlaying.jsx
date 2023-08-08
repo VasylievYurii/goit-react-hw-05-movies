@@ -31,6 +31,7 @@ function NowPlaying() {
         {array.map(movie => (
           <Card
             key={movie.id}
+            movieId={movie.id}
             title={movie.title || movie.name}
             poster={movie['poster_path']}
             type="movie"

@@ -1,5 +1,5 @@
 import { Section, Container } from './Actors.styled';
-import Trending from './Trending/Trending';
+import Trending from 'components/Actors/Trending/Trending';
 
 function Actors() {
   return (

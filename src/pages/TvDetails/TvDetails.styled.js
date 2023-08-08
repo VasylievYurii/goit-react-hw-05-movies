@@ -37,3 +37,30 @@ export const Container = styled.div`
     padding-right: 32px;
   }
 `;
+
+export const Title = styled.h2`
+  padding-top: 20px;
+  padding-bottom: 20px;
+`;
+export const MainWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+export const ImageWrapper = styled.div``;
+export const Poster = styled.img``;
+export const MovieDetailsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+`;
+export const Rating = styled.p``;
+export const FirstRelease = styled.p``;
+export const LastRelease = styled.p``;
+export const NumberOfSeasons = styled.p``;
+export const NumberOfEpisodes = styled.p``;
+export const Country = styled.p``;
+export const Genre = styled.p``;
+export const Overview = styled.p`
+  max-width: 600px;
+`;

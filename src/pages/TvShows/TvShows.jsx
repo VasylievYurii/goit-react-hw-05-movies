@@ -1,6 +1,6 @@
-import GenrePanel from './GenrePanel/GenrePanel';
-import Trending from './Trending/Trending';
-import TopRated from './TopRated/TopRated';
+import GenrePanel from 'components/TvShows/GenrePanel/GenrePanel';
+import Trending from 'components/Movies/Trending/Trending';
+import TopRated from 'components/TvShows/TopRated/TopRated';
 import { Section, Container } from './TvShows.styled';
 
 function TvShows() {
