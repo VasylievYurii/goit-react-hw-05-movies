@@ -2,6 +2,7 @@ import {
   CardWrapper,
   ImgWrapper,
   Poster,
+  NoPoster,
   RatingWrap,
   Star,
   Rating,
@@ -9,8 +10,11 @@ import {
   Title,
   Date,
 } from './Card.styled';
+import { useLocation } from 'react-router-dom';
 
 function Card({ movieId, title, poster, type, rating, date }) {
+  const location = useLocation();
+
   let path = '';
   if (type === 'movie') {
     path = `/movies/${movieId}`;
@@ -19,9 +23,14 @@ function Card({ movieId, title, poster, type, rating, date }) {
   }
 
   return (
-    <CardWrapper to={path}>
+    <CardWrapper to={path} state={{ from: location }}>
       <ImgWrapper>
-        <Poster src={`http://image.tmdb.org/t/p/w200${poster}`} alt={title} />
+        {poster ? (
+          <Poster src={`http://image.tmdb.org/t/p/w200${poster}`} alt={title} />
+        ) : (
+          <NoPoster />
+        )}
+
         <RatingWrap>
           <Star />
           <Rating>{rating.toFixed(1)}</Rating>

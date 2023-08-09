@@ -20,11 +20,15 @@ import {
 } from './TvDetails.styled';
 import Button from 'components/Button/Button';
 import useTvDetailsApi from 'services/tvDetailsAPI';
+import { useLocation } from 'react-router-dom';
+import { useRef } from 'react';
 
 function TvDetails() {
   const [tv, setTv] = useState(null);
   const { movieId } = useParams();
   const metodsForTvDetails = useTvDetailsApi();
+  const location = useLocation();
+  const backLinkHref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     metodsForTvDetails
@@ -47,7 +51,7 @@ function TvDetails() {
     <>
       <Section>
         <Container>
-          <Link to="#">
+          <Link to={backLinkHref.current}>
             <Button>Go Back</Button>
           </Link>
           <Title>{tv?.name}</Title>

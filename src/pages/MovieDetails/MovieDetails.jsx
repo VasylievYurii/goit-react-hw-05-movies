@@ -20,11 +20,15 @@ import {
 } from './MovieDetails.styled';
 import useMoviesDetailsApi from 'services/moviesDetailsAPI';
 import Button from 'components/Button/Button';
+import { useLocation } from 'react-router-dom';
+import { useRef } from 'react';
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
   const metodsForMovieDetails = useMoviesDetailsApi();
+  const location = useLocation();
+  const backLinkHref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     metodsForMovieDetails
@@ -46,7 +50,7 @@ function MovieDetails() {
     <>
       <Section>
         <Container>
-          <Link to="#">
+          <Link to={backLinkHref.current}>
             <Button>Go Back</Button>
           </Link>
           <Title>{movie?.title}</Title>

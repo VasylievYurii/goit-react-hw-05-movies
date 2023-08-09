@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 import { BsFillStarFill } from 'react-icons/bs';
+import { TbMovie } from 'react-icons/tb';
 
 const setTypeColor = ({ colorType }) =>
   colorType === 'movie' ? 'rgba(68,119,206,0.8)' : 'rgba(234,17,121,0.8)';
 
 export const CardWrapper = styled(NavLink)`
   width: 200px;
+
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -14,10 +16,18 @@ export const CardWrapper = styled(NavLink)`
 
 export const ImgWrapper = styled.div`
   position: relative;
+  width: 200px;
+  height: 300px;
 `;
 
 export const Poster = styled.img`
   width: 100%;
+`;
+
+export const NoPoster = styled(TbMovie)`
+  width: 100%;
+  height: 100%;
+  stroke: white;
 `;
 
 export const RatingWrap = styled.div`

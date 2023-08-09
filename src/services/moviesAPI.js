@@ -77,10 +77,10 @@ const getNowPlaying = async () => {
   }
 };
 
-const getMoviesSearch = async query => {
+export const getMoviesSearch = async query => {
   try {
     const result = await axios.get(MOVIES_API.moviesSearch, {
-      params: { query: { query }, api_key: API_KEY, language: 'en-US' },
+      params: { query, api_key: API_KEY, language: 'en-US' },
     });
     return result.data;
   } catch (error) {
