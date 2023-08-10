@@ -1,17 +1,14 @@
 import Upcoming from 'components/Home/Upcoming/Upcoming';
 import Trending from 'components/Home/Trending/Trending';
-import { Section, Container } from './Home.styled';
+import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 
 function Home() {
   return (
     <>
       <Upcoming />
-      <Section>
-        <Container>
-          {' '}
-          <Trending />
-        </Container>
-      </Section>
+      <SectionTemplate>
+        <Trending />
+      </SectionTemplate>
     </>
   );
 }

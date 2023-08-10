@@ -1,14 +1,12 @@
-import { Section, Container } from './Actors.styled';
 import Trending from 'components/Actors/Trending/Trending';
+import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 
 function Actors() {
   return (
     <>
-      <Section>
-        <Container>
-          <Trending />
-        </Container>
-      </Section>
+      <SectionTemplate>
+        <Trending />
+      </SectionTemplate>
     </>
   );
 }

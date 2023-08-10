@@ -5,6 +5,7 @@ import {
   FakeGalleryList,
   FakeItemCardWrapper,
 } from './Loading.styled';
+import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 
 function Loading() {
   const fakeItemCards = [];
@@ -12,11 +13,9 @@ function Loading() {
     fakeItemCards.push(<FakeItemCardWrapper key={i} />);
   }
   return (
-    <Section>
-      <Container>
-        <FakeGalleryList>{fakeItemCards}</FakeGalleryList>
-      </Container>
-    </Section>
+    <SectionTemplate>
+      <FakeGalleryList>{fakeItemCards}</FakeGalleryList>
+    </SectionTemplate>
   );
 }
 
