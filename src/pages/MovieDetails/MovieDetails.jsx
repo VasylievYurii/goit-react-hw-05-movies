@@ -17,6 +17,7 @@ import {
   Runtime,
   Overview,
   LinksWrap,
+  Span,
 } from './MovieDetails.styled';
 import useMoviesDetailsApi from 'services/moviesDetailsAPI';
 import Button from 'components/Button/Button';
@@ -63,15 +64,28 @@ function MovieDetails() {
               />
             </ImageWrapper>
             <MovieDetailsWrapper>
-              <Rating>Rating: {movie['vote_average']}</Rating>
-              <Release>Release: {movie['release_date']}</Release>
+              <Rating>
+                <Span>Rating:</Span>{' '}
+                {Math.round(movie['vote_average'] * 10) / 10}
+              </Rating>
+              <Release>
+                <Span>Release:</Span> {movie['release_date']}
+              </Release>
               <Country>
-                Country: {movie['production_countries'][0]?.name}
+                <Span>Country:</Span> {movie['production_countries'][0]?.name}
               </Country>
-              {movie.budget ? <Budget>Budget: {movie.budget}</Budget> : null}
+              {movie.budget ? (
+                <Budget>
+                  <Span>Budget:</Span> {movie.budget}
+                </Budget>
+              ) : null}
 
-              <Genre>Genres: {movie['genres'][0]?.name}</Genre>
-              <Runtime>Runtime: {movie?.runtime} min</Runtime>
+              <Genre>
+                <Span>Genres:</Span> {movie['genres'][0]?.name}
+              </Genre>
+              <Runtime>
+                <Span>Runtime:</Span> {movie?.runtime} min
+              </Runtime>
               <Overview>{movie?.overview}</Overview>
             </MovieDetailsWrapper>
           </MainWrapper>

@@ -8,7 +8,6 @@ const setTypeColor = ({ colorType }) =>
 
 export const CardWrapper = styled(NavLink)`
   width: 200px;
-
   display: flex;
   flex-direction: column;
   gap: 5px;
