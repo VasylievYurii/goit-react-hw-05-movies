@@ -1,10 +1,17 @@
 import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
+import NoFoundedTemplate from 'components/NoFoundedTemplate/NoFoundedTemplate';
 
 function SearchingResults({ array }) {
-  if (!array) {
-    return;
+  if (array.length === 0) {
+    return (
+      <>
+        {' '}
+        <TitleTemplate>Searching results</TitleTemplate>
+        <NoFoundedTemplate />
+      </>
+    );
   } else {
     return (
       <div>
