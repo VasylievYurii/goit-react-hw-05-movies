@@ -10,6 +10,7 @@ import {
   Name,
   Character,
 } from './CastTv.styled';
+import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 
 function CastTv() {
   const [cast, setCast] = useState(null);
@@ -33,24 +34,27 @@ function CastTv() {
   }
 
   return (
-    <ActorsWrap>
-      {cast.map(actor => (
-        <ActorWrapper key={actor.id}>
-          <PhotoWrap>
-            {actor.profile_path ? (
-              <Photo
-                src={`http://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                alt={actor.name}
-              />
-            ) : (
-              <NoPhoto />
-            )}
-          </PhotoWrap>
-          <Name>{actor.name}</Name>
-          <Character>{actor.character}</Character>
-        </ActorWrapper>
-      ))}
-    </ActorsWrap>
+    <>
+      <TitleTemplate>Cast</TitleTemplate>
+      <ActorsWrap>
+        {cast.map(actor => (
+          <ActorWrapper key={actor.id}>
+            <PhotoWrap>
+              {actor.profile_path ? (
+                <Photo
+                  src={`http://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                  alt={actor.name}
+                />
+              ) : (
+                <NoPhoto />
+              )}
+            </PhotoWrap>
+            <Name>{actor.name}</Name>
+            <Character>{actor.character}</Character>
+          </ActorWrapper>
+        ))}
+      </ActorsWrap>
+    </>
   );
 }
 export default CastTv;

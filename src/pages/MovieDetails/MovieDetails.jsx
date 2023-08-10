@@ -4,15 +4,7 @@ import {
   Title,
   Tagline,
   MainWrapper,
-  ImageWrapper,
-  Poster,
   MovieDetailsWrapper,
-  Rating,
-  Release,
-  Country,
-  Budget,
-  Genre,
-  Runtime,
   Overview,
   LinksWrap,
   Span,
@@ -55,34 +47,34 @@ function MovieDetails() {
         <Title>{movie?.title}</Title>
         <Tagline>{movie?.tagline}</Tagline>
         <MainWrapper>
-          <ImageWrapper>
-            <Poster
+          <div>
+            <img
               src={`http://image.tmdb.org/t/p/w300${movie['poster_path']}`}
               alt={movie?.title}
             />
-          </ImageWrapper>
+          </div>
           <MovieDetailsWrapper>
-            <Rating>
+            <p>
               <Span>Rating:</Span> {Math.round(movie['vote_average'] * 10) / 10}
-            </Rating>
-            <Release>
+            </p>
+            <p>
               <Span>Release:</Span> {movie['release_date']}
-            </Release>
-            <Country>
+            </p>
+            <p>
               <Span>Country:</Span> {movie['production_countries'][0]?.name}
-            </Country>
+            </p>
             {movie.budget ? (
-              <Budget>
+              <p>
                 <Span>Budget:</Span> {movie.budget}
-              </Budget>
+              </p>
             ) : null}
 
-            <Genre>
+            <p>
               <Span>Genres:</Span> {movie['genres'][0]?.name}
-            </Genre>
-            <Runtime>
+            </p>
+            <p>
               <Span>Runtime:</Span> {movie?.runtime} min
-            </Runtime>
+            </p>
             <Overview>{movie?.overview}</Overview>
           </MovieDetailsWrapper>
         </MainWrapper>

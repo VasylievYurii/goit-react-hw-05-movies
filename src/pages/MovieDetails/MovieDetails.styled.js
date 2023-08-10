@@ -40,8 +40,7 @@ export const MainWrapper = styled.div`
     background-image: linear-gradient(to right, #2d2b36, transparent);
   }
 `;
-export const ImageWrapper = styled.div``;
-export const Poster = styled.img``;
+
 export const MovieDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,12 +49,7 @@ export const MovieDetailsWrapper = styled.div`
   border-radius: 20px;
   box-shadow: 0px 2px 8px 0px black;
 `;
-export const Rating = styled.p``;
-export const Release = styled.p``;
-export const Country = styled.p``;
-export const Budget = styled.p``;
-export const Genre = styled.p``;
-export const Runtime = styled.p``;
+
 export const Span = styled.span`
   color: var(--second-color);
 `;
@@ -66,4 +60,5 @@ export const Overview = styled.p`
 export const LinksWrap = styled.ul`
   display: flex;
   gap: 20px;
+  padding-bottom: 20px;
 `;

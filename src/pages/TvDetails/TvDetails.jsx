@@ -3,18 +3,10 @@ import { Outlet, useParams, Link } from 'react-router-dom';
 import {
   Title,
   MainWrapper,
-  ImageWrapper,
-  Poster,
   MovieDetailsWrapper,
-  Rating,
-  FirstRelease,
-  LastRelease,
-  Country,
-  NumberOfSeasons,
-  NumberOfEpisodes,
-  Genre,
   LinksWrap,
   Overview,
+  Span,
 } from './TvDetails.styled';
 import Button from 'components/Button/Button';
 import useTvDetailsApi from 'services/tvDetailsAPI';
@@ -54,25 +46,35 @@ function TvDetails() {
         </Link>
         <Title>{tv?.name}</Title>
         <MainWrapper>
-          <ImageWrapper>
-            <Poster
+          <div>
+            <img
               src={`http://image.tmdb.org/t/p/w300${tv['poster_path']}`}
               alt={tv?.name}
             />
-          </ImageWrapper>
+          </div>
           <MovieDetailsWrapper>
-            <Rating>Rating: {tv['vote_average']}</Rating>
-            <FirstRelease>First air date: {tv['first_air_date']}</FirstRelease>
-            <LastRelease>Last air date: {tv['last_air_date']}</LastRelease>
-            <NumberOfSeasons>
-              Number of seasons: {tv?.number_of_seasons}
-            </NumberOfSeasons>
-            <NumberOfEpisodes>
-              Number of episodes: {tv?.number_of_episodes}
-            </NumberOfEpisodes>
-            <Country>Country: {tv['origin_country'][0]}</Country>
+            <p>
+              <Span>Rating:</Span> {tv['vote_average']}
+            </p>
+            <p>
+              <Span>First air date:</Span> {tv['first_air_date']}
+            </p>
+            <p>
+              <Span>Last air date:</Span> {tv['last_air_date']}
+            </p>
+            <p>
+              <Span>Number of seasons:</Span> {tv?.number_of_seasons}
+            </p>
+            <p>
+              <Span>Number of episodes:</Span> {tv?.number_of_episodes}
+            </p>
+            <p>
+              <Span>Country:</Span> {tv['origin_country'][0]}
+            </p>
 
-            <Genre>Genres: {tv['genres'][0]?.name}</Genre>
+            <p>
+              <Span>Genres:</Span> {tv['genres'][0]?.name}
+            </p>
 
             <Overview>{tv?.overview}</Overview>
           </MovieDetailsWrapper>
