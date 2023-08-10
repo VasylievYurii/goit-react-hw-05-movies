@@ -15,11 +15,4 @@ export const SearchingResultsTitle = styled.h2`
   }
 `;
 
-export const SearchingResultsList = styled.ul`
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding-top: 10px;
-`;
-
 export const SearchWrapper = styled.div``;

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import useTvApi from 'services/tvAPI';
 import Card from 'components/Card/Card';
-import { TopRatedTitle, TopRatedList } from './TopRated.styled';
+import { TopRatedTitle } from './TopRated.styled';
 // import { useLocation } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
+import ListTemplate from 'components/ListTemplate/ListTemplate';
 
 function TopRated() {
   const [error, setError] = useState(false);
@@ -30,7 +31,7 @@ function TopRated() {
   return (
     <div>
       <TopRatedTitle>Top Rated</TopRatedTitle>
-      <TopRatedList>
+      <ListTemplate>
         {array.map(movie => (
           <Card
             key={movie.id}
@@ -42,7 +43,7 @@ function TopRated() {
             date={movie['release_date']}
           />
         ))}
-      </TopRatedList>
+      </ListTemplate>
     </div>
   );
 }

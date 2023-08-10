@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import useTvApi from 'services/tvAPI';
 import Card from 'components/Card/Card';
-import { TrendingTitle, TrendingList } from './Trending.styled';
+import { TrendingTitle } from './Trending.styled';
+import ListTemplate from 'components/ListTemplate/ListTemplate';
 
 function Trending() {
   const [error, setError] = useState(false);
@@ -27,7 +28,7 @@ function Trending() {
   return (
     <div>
       <TrendingTitle>Trending list</TrendingTitle>
-      <TrendingList>
+      <ListTemplate>
         {trendingArray.map(movie => (
           <Card
             key={movie.id}
@@ -39,7 +40,7 @@ function Trending() {
             date={movie['release_date']}
           />
         ))}
-      </TrendingList>
+      </ListTemplate>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import Card from 'components/Card/Card';
 import {
   SearchingResultsTitle,
-  SearchingResultsList,
   SearchWrapper,
 } from './SearchingResults.styled';
+import ListTemplate from 'components/ListTemplate/ListTemplate';
 
 function SearchingResults({ array }) {
   if (!array) {
@@ -12,7 +12,7 @@ function SearchingResults({ array }) {
     return (
       <SearchWrapper>
         <SearchingResultsTitle>Searching results</SearchingResultsTitle>
-        <SearchingResultsList>
+        <ListTemplate>
           {array.map(movie => (
             <Card
               key={movie.id}
@@ -24,7 +24,7 @@ function SearchingResults({ array }) {
               date={movie['release_date']}
             />
           ))}
-        </SearchingResultsList>
+        </ListTemplate>
       </SearchWrapper>
     );
   }

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import useMoviesApi from 'services/moviesAPI';
 import Card from 'components/Card/Card';
-import { PopularTitle, PopularList } from './Popular.styled';
+import { PopularTitle } from './Popular.styled';
+import ListTemplate from 'components/ListTemplate/ListTemplate';
 
 function Popular() {
   const [error, setError] = useState(false);
@@ -27,7 +28,7 @@ function Popular() {
   return (
     <div>
       <PopularTitle>Popular list</PopularTitle>
-      <PopularList>
+      <ListTemplate>
         {array.map(movie => (
           <Card
             key={movie.id}
@@ -39,7 +40,7 @@ function Popular() {
             date={movie['release_date']}
           />
         ))}
-      </PopularList>
+      </ListTemplate>
     </div>
   );
 }

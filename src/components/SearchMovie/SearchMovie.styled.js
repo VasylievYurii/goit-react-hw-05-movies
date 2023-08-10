@@ -4,6 +4,7 @@ import { BiSearchAlt } from 'react-icons/bi';
 export const Form = styled.form`
   display: flex;
   height: 40px;
+  padding-bottom: 20px;
 `;
 
 export const Label = styled.label``;
@@ -20,8 +21,7 @@ export const Input = styled.input`
   border-bottom-right-radius: 0;
   outline: none;
   &::placeholder {
-    /* font-size: 12px; */
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(100, 100, 100, 1);
   }
 `;
 

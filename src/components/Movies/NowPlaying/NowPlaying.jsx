@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import useMoviesApi from 'services/moviesAPI';
 import Card from 'components/Card/Card';
-import { NowPlayingTitle, NowPlayingList } from './NowPlaying.styled';
+import { NowPlayingTitle } from './NowPlaying.styled';
+import ListTemplate from 'components/ListTemplate/ListTemplate';
 
 function NowPlaying() {
   const [error, setError] = useState(false);
@@ -27,7 +28,7 @@ function NowPlaying() {
   return (
     <div>
       <NowPlayingTitle>Now Playing</NowPlayingTitle>
-      <NowPlayingList>
+      <ListTemplate>
         {array.map(movie => (
           <Card
             key={movie.id}
@@ -39,7 +40,7 @@ function NowPlaying() {
             date={movie['release_date']}
           />
         ))}
-      </NowPlayingList>
+      </ListTemplate>
     </div>
   );
 }
