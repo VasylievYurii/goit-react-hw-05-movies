@@ -11,6 +11,8 @@ import {
   List,
   Container,
 } from './Layout.styled';
+import { Suspense } from 'react';
+import Loader from 'components/Loader/Loader';
 
 function Layout() {
   return (
@@ -45,7 +47,9 @@ function Layout() {
         </Container>
       </Header>
       <main>
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );

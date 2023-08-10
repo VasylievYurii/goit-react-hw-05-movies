@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams, Link } from 'react-router-dom';
 import {
   Title,
@@ -13,6 +13,7 @@ import useTvDetailsApi from 'services/tvDetailsAPI';
 import { useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
+import Loader from 'components/Loader/Loader';
 
 function TvDetails() {
   const [tv, setTv] = useState(null);
@@ -93,7 +94,9 @@ function TvDetails() {
             </Link>
           </li>
         </LinksWrap>
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </SectionTemplate>
     </>
   );
