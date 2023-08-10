@@ -11,7 +11,7 @@ function SearchMovie({ onSubmit }) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState(null);
-
+  const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
@@ -36,7 +36,7 @@ function SearchMovie({ onSubmit }) {
       return;
     }
     setLoading(true);
-    getMoviesSearch(query)
+    getMoviesSearch(query, page)
       .then(({ results }) => {
         setMovies(results);
       })
@@ -47,6 +47,7 @@ function SearchMovie({ onSubmit }) {
       .finally(() => {
         setLoading(false);
         onSubmit();
+        setPage(prevPage => prevPage + 1);
       });
   }
 

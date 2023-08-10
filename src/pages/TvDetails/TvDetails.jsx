@@ -26,7 +26,6 @@ function TvDetails() {
     metodsForTvDetails
       .getTvDetails(movieId)
       .then(res => {
-        console.log('res:', res);
         setTv(res);
       })
       .catch(err => {
