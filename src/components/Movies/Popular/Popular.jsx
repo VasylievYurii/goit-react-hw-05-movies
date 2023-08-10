@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import useMoviesApi from 'services/moviesAPI';
 import Card from 'components/Card/Card';
-import { PopularTitle } from './Popular.styled';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
+import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 
 function Popular() {
   const [error, setError] = useState(false);
@@ -27,7 +27,7 @@ function Popular() {
   }, []);
   return (
     <div>
-      <PopularTitle>Popular list</PopularTitle>
+      <TitleTemplate>Popular list</TitleTemplate>
       <ListTemplate>
         {array.map(movie => (
           <Card

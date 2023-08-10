@@ -1,17 +1,14 @@
 import Card from 'components/Card/Card';
-import {
-  SearchingResultsTitle,
-  SearchWrapper,
-} from './SearchingResults.styled';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
+import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 
 function SearchingResults({ array }) {
   if (!array) {
     return;
   } else {
     return (
-      <SearchWrapper>
-        <SearchingResultsTitle>Searching results</SearchingResultsTitle>
+      <div>
+        <TitleTemplate>Searching results</TitleTemplate>
         <ListTemplate>
           {array.map(movie => (
             <Card
@@ -25,7 +22,7 @@ function SearchingResults({ array }) {
             />
           ))}
         </ListTemplate>
-      </SearchWrapper>
+      </div>
     );
   }
 }

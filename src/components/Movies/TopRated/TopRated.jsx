@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import useMoviesApi from 'services/moviesAPI';
 import Card from 'components/Card/Card';
-import { TopRatedTitle } from './TopRated.styled';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
+import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 
 function TopRated() {
   const [error, setError] = useState(false);
@@ -27,7 +27,7 @@ function TopRated() {
   }, []);
   return (
     <div>
-      <TopRatedTitle>Top Rated</TopRatedTitle>
+      <TitleTemplate>Top Rated</TitleTemplate>
       <ListTemplate>
         {array.map(movie => (
           <Card

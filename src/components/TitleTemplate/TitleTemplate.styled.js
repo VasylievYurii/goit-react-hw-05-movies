@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const NowPlayingTitle = styled.h2`
+export const Title = styled.h2`
   position: relative;
   padding-bottom: 10px;
   color: white;

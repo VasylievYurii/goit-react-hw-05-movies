@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import useHomeApi from 'services/homeAPI';
 import Card from 'components/Card/Card';
-import { TrendingTitle } from './Trending.styled';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
+import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 
 function Trending() {
   const [error, setError] = useState(false);
@@ -27,7 +27,7 @@ function Trending() {
   }, []);
   return (
     <>
-      <TrendingTitle>Trending list</TrendingTitle>
+      <TitleTemplate>Trending list</TitleTemplate>
       <ListTemplate>
         {trendingArray.map(movie => (
           <Card
