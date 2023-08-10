@@ -13,6 +13,7 @@ import {
   ReviewText,
 } from './ReviewsTv.styled';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
+import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 
 function ReviewsTv() {
   const [reviews, setReviews] = useState(null);
@@ -32,7 +33,11 @@ function ReviewsTv() {
   }, []);
 
   if (!reviews) {
-    return;
+    return (
+      <SectionTemplate>
+        <h3>Sorry! There are no reviews!</h3>
+      </SectionTemplate>
+    );
   }
 
   return (

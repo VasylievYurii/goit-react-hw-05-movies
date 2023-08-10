@@ -3,7 +3,7 @@ import useMoviesApi from 'services/moviesAPI';
 import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
-
+import Loading from 'components/Loading/Loading';
 function Popular() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -25,6 +25,15 @@ function Popular() {
         setLoading(false);
       });
   }, []);
+  if (loading) {
+    return (
+      <>
+        <TitleTemplate>Popular list...</TitleTemplate>
+        <Loading />
+      </>
+    );
+  }
+
   return (
     <div>
       <TitleTemplate>Popular list</TitleTemplate>

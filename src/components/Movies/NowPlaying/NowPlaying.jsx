@@ -3,6 +3,7 @@ import useMoviesApi from 'services/moviesAPI';
 import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
+import Loading from 'components/Loading/Loading';
 
 function NowPlaying() {
   const [error, setError] = useState(false);
@@ -25,6 +26,16 @@ function NowPlaying() {
         setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return (
+      <>
+        <TitleTemplate>Now Playing...</TitleTemplate>
+        <Loading />
+      </>
+    );
+  }
+
   return (
     <div>
       <TitleTemplate>Now Playing</TitleTemplate>

@@ -13,7 +13,7 @@ import {
   ReviewText,
 } from './Reviews.styled';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
-
+import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 function Reviews() {
   const [reviews, setReviews] = useState(null);
   const { movieId } = useParams();
@@ -32,7 +32,12 @@ function Reviews() {
   }, []);
 
   if (!reviews) {
-    return;
+    console.log('reviews:', reviews);
+    return (
+      <SectionTemplate>
+        <h3>Sorry! There are no reviews!</h3>
+      </SectionTemplate>
+    );
   }
 
   return (
