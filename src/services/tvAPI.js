@@ -51,10 +51,10 @@ export const getTvTopRated = async () => {
   }
 };
 
-export const getTvSearch = async query => {
+export const getTvSearch = async (query, page) => {
   try {
-    const result = await axios.get(TV_API.moviesSearch, {
-      params: { query: { query }, api_key: API_KEY, language: 'en-US' },
+    const result = await axios.get(TV_API.tvSearch, {
+      params: { query, api_key: API_KEY, language: 'en-US', page },
     });
     return result.data;
   } catch (error) {
