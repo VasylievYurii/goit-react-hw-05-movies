@@ -8,6 +8,9 @@ import {
   Overview,
   LinksWrap,
   Span,
+  ImageWrapper,
+  Poster,
+  NoPoster,
 } from './MovieDetails.styled';
 import { getMoviesDetails } from 'services/moviesDetailsAPI';
 import Button from 'components/Button/Button';
@@ -47,22 +50,32 @@ function MovieDetails() {
         <Title>{movie?.title}</Title>
         <Tagline>{movie?.tagline}</Tagline>
         <MainWrapper>
-          <div>
-            <img
-              src={`http://image.tmdb.org/t/p/w300${movie['poster_path']}`}
-              alt={movie?.title}
-            />
-          </div>
+          <ImageWrapper>
+            {movie['poster_path'] ? (
+              <Poster
+                src={`http://image.tmdb.org/t/p/w300${movie['poster_path']}`}
+                alt={movie?.title}
+              />
+            ) : (
+              <NoPoster />
+            )}
+          </ImageWrapper>
           <MovieDetailsWrapper>
-            <p>
-              <Span>Rating:</Span> {Math.round(movie['vote_average'] * 10) / 10}
-            </p>
-            <p>
-              <Span>Release:</Span> {movie['release_date']}
-            </p>
+            {movie['vote_average'] ? (
+              <p>
+                <Span>Rating:</Span>{' '}
+                {Math.round(movie['vote_average'] * 10) / 10}
+              </p>
+            ) : null}
+            {movie['release_date'] ? (
+              <p>
+                <Span>Release:</Span> {movie['release_date']}
+              </p>
+            ) : null}
+
             {movie['production_countries'][0] ? (
               <p>
-                <Span>Country:</Span> {movie['production_countries'][0]?.name}
+                <Span>Country:</Span> {movie['production_countries'][0].name}
               </p>
             ) : null}
 
@@ -71,13 +84,18 @@ function MovieDetails() {
                 <Span>Budget:</Span> {movie.budget}
               </p>
             ) : null}
+            {movie['genres'] ? (
+              <p>
+                <Span>Genres:</Span> {movie['genres'][0].name}
+              </p>
+            ) : null}
 
-            <p>
-              <Span>Genres:</Span> {movie['genres'][0]?.name}
-            </p>
-            <p>
-              <Span>Runtime:</Span> {movie?.runtime} min
-            </p>
+            {movie.runtime ? (
+              <p>
+                <Span>Runtime:</Span> {movie.runtime} min
+              </p>
+            ) : null}
+
             <Overview>{movie?.overview}</Overview>
           </MovieDetailsWrapper>
         </MainWrapper>

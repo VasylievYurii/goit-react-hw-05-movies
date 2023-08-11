@@ -52,6 +52,7 @@ export const Icon = styled(BiSearchAlt)`
 `;
 
 export const BtnLoadMore = styled.button`
+  position: relative;
   background-image: linear-gradient(
     to right,
     #485563 0%,
@@ -66,6 +67,8 @@ export const BtnLoadMore = styled.button`
   color: white;
   border-radius: 10px;
   display: block;
+  min-width: 166px;
+  height: 50px;
   cursor: pointer;
   margin: 0 auto;
   &:hover {

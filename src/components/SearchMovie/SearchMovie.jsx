@@ -14,13 +14,14 @@ import {
   BtnLoadMore,
   Icon,
 } from './SearchMovie.styled';
+import { ThreeDots } from 'react-loader-spinner';
 
 function SearchMovie({ onSubmit }) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loaderLoadMore, setLoaderLoadMore] = useState(false);
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  // const cachedFn = useCallback(fn, dependencies);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
@@ -34,7 +35,13 @@ function SearchMovie({ onSubmit }) {
       return;
     }
     const debouncedSearch = debounce((query, page) => {
-      setLoading(true);
+      if (page === 1) {
+        setLoading(true);
+      }
+      if (page > 1) {
+        setLoaderLoadMore(true);
+      }
+
       setError(false);
 
       getMoviesSearch(query, page)
@@ -51,7 +58,7 @@ function SearchMovie({ onSubmit }) {
         })
         .finally(() => {
           setLoading(false);
-          // onSubmit(true);
+          setLoaderLoadMore(false);
         });
     }, 300);
     debouncedSearch(query, page);
@@ -61,6 +68,7 @@ function SearchMovie({ onSubmit }) {
   }, [query, page]);
 
   const handleLoadMore = () => {
+    setLoaderLoadMore(true);
     setPage(prevPage => prevPage + 1);
   };
 
@@ -141,7 +149,28 @@ function SearchMovie({ onSubmit }) {
       {movies.length > 0 ? (
         <>
           <SearchingResults array={movies} />
-          <BtnLoadMore onClick={handleLoadMore}>Load more</BtnLoadMore>
+          {!loaderLoadMore ? (
+            <BtnLoadMore onClick={handleLoadMore}>Load more</BtnLoadMore>
+          ) : (
+            <BtnLoadMore>
+              <ThreeDots
+                height="50"
+                width="50"
+                radius="9"
+                color="#fe6d31"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{
+                  justifyContent: 'center',
+                  position: 'absolute',
+                  top: '0',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                }}
+                wrapperClassName=""
+                visible={true}
+              />
+            </BtnLoadMore>
+          )}
         </>
       ) : null}
     </>
