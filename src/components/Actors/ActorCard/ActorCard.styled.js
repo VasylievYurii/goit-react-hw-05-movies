@@ -6,6 +6,7 @@ export const CardWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  cursor: auto;
 `;
 
 export const ImgWrapper = styled.div`
