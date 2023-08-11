@@ -61,9 +61,12 @@ function MovieDetails() {
             <p>
               <Span>Release:</Span> {movie['release_date']}
             </p>
-            <p>
-              <Span>Country:</Span> {movie['production_countries'][0]?.name}
-            </p>
+            {movie['production_countries'][0] ? (
+              <p>
+                <Span>Country:</Span> {movie['production_countries'][0]?.name}
+              </p>
+            ) : null}
+
             {movie.budget ? (
               <p>
                 <Span>Budget:</Span> {movie.budget}

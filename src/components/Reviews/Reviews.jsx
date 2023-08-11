@@ -14,8 +14,9 @@ import {
 } from './Reviews.styled';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
+
 function Reviews() {
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
   const metodsForMovieDetails = useMoviesDetailsApi();
 
@@ -31,8 +32,20 @@ function Reviews() {
       .finally(() => {});
   }, []);
 
-  if (!reviews) {
-    console.log('reviews:', reviews);
+  // if (error) {
+  //   toast.error('Sorry for the inconvenience! Try again later.', {
+  //     position: 'top-right',
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: 'colored',
+  //   });
+  // }
+
+  if (reviews.length === 0) {
     return (
       <SectionTemplate>
         <h3>Sorry! There are no reviews!</h3>
@@ -49,7 +62,6 @@ function Reviews() {
             {author_details.rating ? (
               <AuthorRating>{author_details.rating}/10</AuthorRating>
             ) : null}
-
             <AuthorWrap>
               <PhotoWrap>
                 {author_details.avatar_path ? (

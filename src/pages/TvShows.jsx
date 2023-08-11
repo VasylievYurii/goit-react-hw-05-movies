@@ -1,5 +1,5 @@
 import GenrePanel from 'components/TvShows/GenrePanel/GenrePanel';
-import Trending from 'components/Movies/Trending/Trending';
+import Trending from 'components/TvShows/Trending/Trending';
 import TopRated from 'components/TvShows/TopRated/TopRated';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 

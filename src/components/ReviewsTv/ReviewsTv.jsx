@@ -16,7 +16,7 @@ import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 
 function ReviewsTv() {
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
   const metodsForMovieDetails = useTvDetailsApi();
 
@@ -32,7 +32,20 @@ function ReviewsTv() {
       .finally(() => {});
   }, []);
 
-  if (!reviews) {
+  // if (error) {
+  //   toast.error('Sorry for the inconvenience! Try again later.', {
+  //     position: 'top-right',
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: 'colored',
+  //   });
+  // }
+
+  if (reviews.length === 0) {
     return (
       <SectionTemplate>
         <h3>Sorry! There are no reviews!</h3>

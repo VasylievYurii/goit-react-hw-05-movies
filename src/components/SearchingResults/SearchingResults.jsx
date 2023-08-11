@@ -14,12 +14,12 @@ function SearchingResults({ array }) {
     );
   } else {
     return (
-      <div>
+      <>
         <TitleTemplate>Searching results</TitleTemplate>
         <ListTemplate>
-          {array.map(movie => (
+          {array.map((movie, index) => (
             <Card
-              key={movie.id}
+              key={`${movie.id}-${index}`}
               movieId={movie.id}
               title={movie.title || movie.name}
               poster={movie['poster_path']}
@@ -29,7 +29,7 @@ function SearchingResults({ array }) {
             />
           ))}
         </ListTemplate>
-      </div>
+      </>
     );
   }
 }

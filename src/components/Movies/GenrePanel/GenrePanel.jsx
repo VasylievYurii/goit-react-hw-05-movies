@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import useMoviesApi from 'services/moviesAPI';
 import { GenreList, GenreName } from './GenrePanel.styled';
+import { toast } from 'react-toastify';
 
 function GenrePanel() {
   const [error, setError] = useState(false);
@@ -23,6 +24,20 @@ function GenrePanel() {
         setLoading(false);
       });
   }, []);
+
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }
+
   return (
     <>
       <GenreList>

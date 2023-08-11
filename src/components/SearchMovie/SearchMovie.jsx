@@ -1,28 +1,75 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getMoviesSearch } from 'services/moviesAPI';
-import SearchingResults from 'components/SearchingResults/SearchingResults';
-import { Form, Label, Input, Button, Icon } from './SearchMovie.styled';
 import { toast } from 'react-toastify';
+import debounce from 'lodash.debounce';
 import Loading from 'components/Loading/Loading';
+import SearchingResults from 'components/SearchingResults/SearchingResults';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
+import {
+  Form,
+  Label,
+  Input,
+  ButtonSearch,
+  BtnLoadMore,
+  Icon,
+} from './SearchMovie.styled';
 
 function SearchMovie({ onSubmit }) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
+
+  const debouncedSearch = debounce((query, page) => {
+    setLoading(true);
+    setError(false);
+
+    getMoviesSearch(query, page)
+      .then(({ results }) => {
+        if (page === 1) {
+          setMovies(results);
+        } else {
+          setMovies(prevMovies => [...prevMovies, ...results]);
+        }
+      })
+      .catch(err => {
+        setError(true);
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+        onSubmit(true);
+      });
+  }, 300);
 
   function updateQuery(newQuery) {
     searchParams.set('query', newQuery);
     setSearchParams(searchParams);
   }
 
-  function handleOnSubmit(evt) {
+  useEffect(() => {
+    if (query.trim() === '') {
+      return;
+    }
+
+    debouncedSearch(query, page);
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [query, page]);
+
+  const handleLoadMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
+
+  const handleOnSubmit = evt => {
     evt.preventDefault();
     if (query.trim() === '') {
+      onSubmit(false);
+      setMovies([]);
       toast.error('Searching is empty!', {
         position: 'top-right',
         autoClose: 5000,
@@ -35,20 +82,20 @@ function SearchMovie({ onSubmit }) {
       });
       return;
     }
-    setLoading(true);
-    getMoviesSearch(query, page)
-      .then(({ results }) => {
-        setMovies(results);
-      })
-      .catch(err => {
-        setError(true);
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-        onSubmit();
-        setPage(prevPage => prevPage + 1);
-      });
+    setPage(1);
+  };
+
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
   }
 
   if (loading) {
@@ -63,9 +110,9 @@ function SearchMovie({ onSubmit }) {
               onChange={evt => updateQuery(evt.target.value)}
             />
           </Label>
-          <Button type="submit" disabled>
+          <ButtonSearch type="submit" disabled>
             <Icon />
-          </Button>
+          </ButtonSearch>
         </Form>
         <TitleTemplate>Searching...</TitleTemplate>
         <Loading />
@@ -84,12 +131,17 @@ function SearchMovie({ onSubmit }) {
             onChange={evt => updateQuery(evt.target.value)}
           />
         </Label>
-        <Button type="submit">
+        <ButtonSearch type="submit">
           <Icon />
-        </Button>
+        </ButtonSearch>
       </Form>
 
-      {movies ? <SearchingResults array={movies} /> : null}
+      {movies.length > 0 ? (
+        <>
+          <SearchingResults array={movies} />
+          <BtnLoadMore onClick={handleLoadMore}>Load more</BtnLoadMore>
+        </>
+      ) : null}
     </>
   );
 }

@@ -6,6 +6,8 @@ import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 import Loading from 'components/Loading/Loading';
+import { toast } from 'react-toastify';
+
 function TopRated() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,6 +30,20 @@ function TopRated() {
         setLoading(false);
       });
   }, []);
+
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }
+
   if (loading) {
     return (
       <>

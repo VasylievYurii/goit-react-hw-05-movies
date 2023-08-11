@@ -13,7 +13,7 @@ function Movies() {
     <>
       <GenrePanel />
       <SectionTemplate>
-        <SearchMovie onSubmit={() => setSearchingQuery(true)} />
+        <SearchMovie onSubmit={e => setSearchingQuery(e)} />
         {!searchingQuery ? (
           <>
             {' '}

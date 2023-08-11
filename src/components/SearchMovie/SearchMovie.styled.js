@@ -25,7 +25,7 @@ export const Input = styled.input`
   }
 `;
 
-export const Button = styled.button`
+export const ButtonSearch = styled.button`
   background-color: #fe6d31;
   border: none;
   cursor: pointer;
@@ -49,4 +49,28 @@ export const Icon = styled(BiSearchAlt)`
   padding: 0;
   width: 90%;
   height: 90%;
+`;
+
+export const BtnLoadMore = styled.button`
+  background-image: linear-gradient(
+    to right,
+    #485563 0%,
+    #29323c 51%,
+    #485563 100%
+  );
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;
+  &:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+  }
 `;
