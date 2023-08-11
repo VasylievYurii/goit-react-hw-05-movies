@@ -20,6 +20,7 @@ function SearchMovie({ onSubmit }) {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
+  // const cachedFn = useCallback(fn, dependencies);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
@@ -50,7 +51,7 @@ function SearchMovie({ onSubmit }) {
         })
         .finally(() => {
           setLoading(false);
-          onSubmit(true);
+          // onSubmit(true);
         });
     }, 300);
     debouncedSearch(query, page);
@@ -79,6 +80,8 @@ function SearchMovie({ onSubmit }) {
         theme: 'colored',
       });
       return;
+    } else {
+      onSubmit(true);
     }
     setPage(1);
   };
@@ -97,6 +100,7 @@ function SearchMovie({ onSubmit }) {
   }
 
   if (loading) {
+    onSubmit(true);
     return (
       <>
         <Form>
