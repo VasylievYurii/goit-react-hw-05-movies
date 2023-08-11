@@ -8,7 +8,7 @@ axios.defaults.baseURL = API_BASE_URL;
 // Cast            https://api.themoviedb.org/3/movie/               {movie_id}/credits
 // Reviews         https://api.themoviedb.org/3/movie/               {movie_id}/reviews
 
-const getMoviesDetails = async movie_id => {
+export const getMoviesDetails = async movie_id => {
   try {
     const result = await axios.get(`/movie/${movie_id}`, {
       params: { api_key: API_KEY },
@@ -19,7 +19,7 @@ const getMoviesDetails = async movie_id => {
   }
 };
 
-const getMoviesCast = async movie_id => {
+export const getMoviesCast = async movie_id => {
   try {
     const result = await axios.get(`/movie/${movie_id}/credits`, {
       params: { api_key: API_KEY },
@@ -30,7 +30,7 @@ const getMoviesCast = async movie_id => {
   }
 };
 
-const getMoviesReviews = async movie_id => {
+export const getMoviesReviews = async movie_id => {
   try {
     const result = await axios.get(`/movie/${movie_id}/reviews`, {
       params: { api_key: API_KEY },
@@ -40,13 +40,3 @@ const getMoviesReviews = async movie_id => {
     throw new Error(error.response.data.message);
   }
 };
-
-const useMoviesDetailsApi = () => {
-  return {
-    getMoviesDetails,
-    getMoviesCast,
-    getMoviesReviews,
-  };
-};
-
-export default useMoviesDetailsApi;

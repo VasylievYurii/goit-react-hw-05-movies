@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useMoviesApi from 'services/moviesAPI';
+import { getPopular } from 'services/moviesAPI';
 import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
@@ -11,11 +11,10 @@ function Popular() {
   const [loading, setLoading] = useState(false);
   const [array, setArray] = useState([]);
 
-  const itemsForTrending = useMoviesApi();
   useEffect(() => {
     setLoading(true);
-    itemsForTrending
-      .getPopular()
+
+    getPopular()
       .then(({ results }) => {
         setArray(results);
       })

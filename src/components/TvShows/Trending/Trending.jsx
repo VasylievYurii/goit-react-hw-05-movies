@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useTvApi from 'services/tvAPI';
+import { getTvTrendingList } from 'services/tvAPI';
 import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
@@ -11,11 +11,10 @@ function Trending() {
   const [loading, setLoading] = useState(false);
   const [trendingArray, setTrendingArray] = useState([]);
 
-  const itemsForTrending = useTvApi();
   useEffect(() => {
     setLoading(true);
-    itemsForTrending
-      .getTvTrendingList()
+
+    getTvTrendingList()
       .then(({ results }) => {
         setTrendingArray(results);
       })

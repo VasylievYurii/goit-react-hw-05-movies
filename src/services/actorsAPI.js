@@ -11,12 +11,12 @@ axios.defaults.baseURL = API_BASE_URL;
 
 const ACTORS_API = {
   trending: '/trending/person/day',
-  peopleSearch: '/search/person',
-  popular: '/person/popular',
-  person: '/person/',
+  // peopleSearch: '/search/person',
+  // popular: '/person/popular',
+  // person: '/person/',
 };
 
-const getTrendingActorsList = async () => {
+export const getTrendingActorsList = async () => {
   try {
     const result = await axios.get(ACTORS_API.trending, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -27,54 +27,43 @@ const getTrendingActorsList = async () => {
   }
 };
 
-const getPopularActors = async () => {
-  try {
-    const result = await axios.get(ACTORS_API.popular, {
-      params: { api_key: API_KEY, language: 'en-US' },
-    });
-    return result.data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-};
+// export const getPopularActors = async () => {
+//   try {
+//     const result = await axios.get(ACTORS_API.popular, {
+//       params: { api_key: API_KEY, language: 'en-US' },
+//     });
+//     return result.data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// };
 
-const getActorSearch = async query => {
-  try {
-    const result = await axios.get(ACTORS_API.peopleSearch, {
-      params: {
-        query: { query },
-        api_key: API_KEY,
-        language: 'en-US',
-        page: 1,
-      },
-    });
-    return result.data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-};
+// export const getActorSearch = async query => {
+//   try {
+//     const result = await axios.get(ACTORS_API.peopleSearch, {
+//       params: {
+//         query: { query },
+//         api_key: API_KEY,
+//         language: 'en-US',
+//         page: 1,
+//       },
+//     });
+//     return result.data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// };
 
-const getActorDetails = async person_id => {
-  try {
-    const result = await axios.get(
-      { person_id },
-      {
-        params: { api_key: API_KEY },
-      }
-    );
-    return result.data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-};
-
-const useActorsApi = () => {
-  return {
-    getTrendingActorsList,
-    getPopularActors,
-    getActorSearch,
-    getActorDetails,
-  };
-};
-
-export default useActorsApi;
+// export const getActorDetails = async person_id => {
+//   try {
+//     const result = await axios.get(
+//       { person_id },
+//       {
+//         params: { api_key: API_KEY },
+//       }
+//     );
+//     return result.data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// };

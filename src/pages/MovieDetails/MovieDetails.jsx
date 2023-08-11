@@ -9,7 +9,7 @@ import {
   LinksWrap,
   Span,
 } from './MovieDetails.styled';
-import useMoviesDetailsApi from 'services/moviesDetailsAPI';
+import { getMoviesDetails } from 'services/moviesDetailsAPI';
 import Button from 'components/Button/Button';
 import { useLocation } from 'react-router-dom';
 import { useRef } from 'react';
@@ -19,13 +19,12 @@ import Loader from 'components/Loader/Loader';
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  const metodsForMovieDetails = useMoviesDetailsApi();
+
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
-    metodsForMovieDetails
-      .getMoviesDetails(movieId)
+    getMoviesDetails(movieId)
       .then(res => {
         setMovie(res);
       })
@@ -33,7 +32,7 @@ function MovieDetails() {
         console.log(err);
       })
       .finally(() => {});
-  }, []);
+  }, [movieId]);
 
   if (!movie) {
     return;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useTvApi from 'services/tvAPI';
+import { getTvGenres } from 'services/tvAPI';
 import { GenreList, GenreName } from './GenrePanel.styled';
 import { toast } from 'react-toastify';
 
@@ -8,11 +8,10 @@ function GenrePanel() {
   const [loading, setLoading] = useState(false);
   const [array, setArray] = useState([]);
 
-  const itemsForTrending = useTvApi();
   useEffect(() => {
     setLoading(true);
-    itemsForTrending
-      .getTvGenres()
+
+    getTvGenres()
       .then(({ genres }) => {
         setArray(genres);
       })
@@ -36,6 +35,14 @@ function GenrePanel() {
       progress: undefined,
       theme: 'colored',
     });
+  }
+
+  if (loading) {
+    return (
+      <>
+        <p>Loading...</p>
+      </>
+    );
   }
 
   return (

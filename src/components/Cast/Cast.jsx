@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useMoviesDetailsApi from 'services/moviesDetailsAPI';
+import { getMoviesCast } from 'services/moviesDetailsAPI';
 import {
   ActorsWrap,
   ActorWrapper,
@@ -15,11 +15,9 @@ import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 function Cast() {
   const [cast, setCast] = useState(null);
   const { movieId } = useParams();
-  const metodsForMovieDetails = useMoviesDetailsApi();
 
   useEffect(() => {
-    metodsForMovieDetails
-      .getMoviesCast(movieId)
+    getMoviesCast(movieId)
       .then(({ cast }) => {
         setCast(cast);
       })
@@ -27,7 +25,7 @@ function Cast() {
         console.log(err);
       })
       .finally(() => {});
-  }, []);
+  }, [movieId]);
 
   if (!cast) {
     return;

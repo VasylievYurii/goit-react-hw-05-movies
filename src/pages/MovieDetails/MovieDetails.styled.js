@@ -15,11 +15,13 @@ export const Title = styled.h2`
     background-image: linear-gradient(to right, #2d2b36, transparent);
   }
 `;
+
 export const Tagline = styled.p`
   padding-bottom: 20px;
   color: #8f938f;
   font-size: 14px;
 `;
+
 export const MainWrapper = styled.div`
   display: flex;
   gap: 20px;

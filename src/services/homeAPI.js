@@ -11,10 +11,10 @@ axios.defaults.baseURL = API_BASE_URL;
 const HOME_API = {
   trending: '/trending/all/day',
   upcoming: '/movie/upcoming',
-  multiSearch: '/search/multi',
+  // multiSearch: '/search/multi',
 };
 
-const getTrendingMultiList = async () => {
+export const getTrendingMultiList = async () => {
   try {
     const result = await axios.get(HOME_API.trending, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -25,7 +25,7 @@ const getTrendingMultiList = async () => {
   }
 };
 
-const getUpcomingList = async () => {
+export const getUpcomingList = async () => {
   try {
     const result = await axios.get(HOME_API.upcoming, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -36,23 +36,13 @@ const getUpcomingList = async () => {
   }
 };
 
-const getSearchingItem = async query => {
-  try {
-    const result = await axios.get(HOME_API.multiSearch, {
-      params: { query },
-    });
-    return result.data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-};
-
-const useHomeApi = () => {
-  return {
-    getTrendingMultiList,
-    getUpcomingList,
-    getSearchingItem,
-  };
-};
-
-export default useHomeApi;
+// export const getSearchingItem = async query => {
+//   try {
+//     const result = await axios.get(HOME_API.multiSearch, {
+//       params: { query },
+//     });
+//     return result.data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// };

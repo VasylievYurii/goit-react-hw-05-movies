@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useMoviesApi from 'services/moviesAPI';
+import { getTrendingMoviesList } from 'services/moviesAPI';
 import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
@@ -11,11 +11,10 @@ function Trending() {
   const [loading, setLoading] = useState(false);
   const [trendingArray, setTrendingArray] = useState([]);
 
-  const itemsForTrending = useMoviesApi();
   useEffect(() => {
     setLoading(true);
-    itemsForTrending
-      .getTrendingMoviesList()
+
+    getTrendingMoviesList()
       .then(({ results }) => {
         setTrendingArray(results);
       })

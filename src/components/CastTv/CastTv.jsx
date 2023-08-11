@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useTvDetailsApi from 'services/tvDetailsAPI';
+import { getTvCast } from 'services/tvDetailsAPI';
 import {
   ActorsWrap,
   ActorWrapper,
@@ -15,11 +15,9 @@ import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 function CastTv() {
   const [cast, setCast] = useState(null);
   const { movieId } = useParams();
-  const metodsForMovieDetails = useTvDetailsApi();
 
   useEffect(() => {
-    metodsForMovieDetails
-      .getTvCast(movieId)
+    getTvCast(movieId)
       .then(({ cast }) => {
         setCast(cast);
       })
@@ -27,7 +25,7 @@ function CastTv() {
         console.log(err);
       })
       .finally(() => {});
-  }, []);
+  }, [movieId]);
 
   if (!cast) {
     return;

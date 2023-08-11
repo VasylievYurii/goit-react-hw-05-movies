@@ -23,28 +23,6 @@ function SearchMovie({ onSubmit }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
-  const debouncedSearch = debounce((query, page) => {
-    setLoading(true);
-    setError(false);
-
-    getMoviesSearch(query, page)
-      .then(({ results }) => {
-        if (page === 1) {
-          setMovies(results);
-        } else {
-          setMovies(prevMovies => [...prevMovies, ...results]);
-        }
-      })
-      .catch(err => {
-        setError(true);
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-        onSubmit(true);
-      });
-  }, 300);
-
   function updateQuery(newQuery) {
     searchParams.set('query', newQuery);
     setSearchParams(searchParams);
@@ -54,7 +32,27 @@ function SearchMovie({ onSubmit }) {
     if (query.trim() === '') {
       return;
     }
+    const debouncedSearch = debounce((query, page) => {
+      setLoading(true);
+      setError(false);
 
+      getMoviesSearch(query, page)
+        .then(({ results }) => {
+          if (page === 1) {
+            setMovies(results);
+          } else {
+            setMovies(prevMovies => [...prevMovies, ...results]);
+          }
+        })
+        .catch(err => {
+          setError(true);
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+          onSubmit(true);
+        });
+    }, 300);
     debouncedSearch(query, page);
     return () => {
       debouncedSearch.cancel();

@@ -8,7 +8,7 @@ axios.defaults.baseURL = API_BASE_URL;
 // Cast            https://api.themoviedb.org/3/tv/               {series_id}/credits
 // Reviews         https://api.themoviedb.org/3/tv/               {series_id}/reviews
 
-const getTvDetails = async series_id => {
+export const getTvDetails = async series_id => {
   try {
     const result = await axios.get(`/tv/${series_id}`, {
       params: { api_key: API_KEY },
@@ -19,7 +19,7 @@ const getTvDetails = async series_id => {
   }
 };
 
-const getTvCast = async series_id => {
+export const getTvCast = async series_id => {
   try {
     const result = await axios.get(`/tv/${series_id}/credits`, {
       params: { api_key: API_KEY },
@@ -30,7 +30,7 @@ const getTvCast = async series_id => {
   }
 };
 
-const getTvReviews = async series_id => {
+export const getTvReviews = async series_id => {
   try {
     const result = await axios.get(`/tv/${series_id}/reviews`, {
       params: { api_key: API_KEY },
@@ -40,13 +40,3 @@ const getTvReviews = async series_id => {
     throw new Error(error.response.data.message);
   }
 };
-
-const useTvDetailsApi = () => {
-  return {
-    getTvDetails,
-    getTvCast,
-    getTvReviews,
-  };
-};
-
-export default useTvDetailsApi;

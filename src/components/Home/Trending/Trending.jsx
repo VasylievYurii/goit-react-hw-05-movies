@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useHomeApi from 'services/homeAPI';
+import { getTrendingMultiList } from 'services/homeAPI';
 import Card from 'components/Card/Card';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
@@ -11,11 +11,10 @@ function Trending() {
   const [loading, setLoading] = useState(false);
   const [trendingArray, setTrendingArray] = useState([]);
 
-  const itemsForTrending = useHomeApi();
   useEffect(() => {
     setLoading(true);
-    itemsForTrending
-      .getTrendingMultiList()
+
+    getTrendingMultiList()
       .then(({ results }) => {
         setTrendingArray(results);
       })

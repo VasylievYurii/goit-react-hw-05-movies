@@ -1,22 +1,14 @@
 import { useState, useEffect } from 'react';
-import useHomeApi from 'services/homeAPI';
+import { getUpcomingList } from 'services/homeAPI';
 import { Link } from 'react-router-dom';
 import { Section } from './Upcoming.styled';
 import getRandomFromArray from 'scripts/getRandomFromArray';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-
-// import required modules
-import {
-  Autoplay,
-  Keyboard,
-  EffectCoverflow,
-  Pagination,
-} from 'swiper/modules';
+import { toast } from 'react-toastify';
+import { Autoplay, Keyboard, EffectCoverflow } from 'swiper/modules';
 
 function Upcoming() {
   const [error, setError] = useState(false);
@@ -36,11 +28,10 @@ function Upcoming() {
     }
   }, [loopActive]);
 
-  const itemsForHome = useHomeApi();
   useEffect(() => {
     setLoading(true);
-    itemsForHome
-      .getUpcomingList()
+
+    getUpcomingList()
       .then(({ results }) => {
         setUpcomingList(results);
       })
@@ -60,6 +51,27 @@ function Upcoming() {
     const poster = getRandomFromArray(UpcomingList);
     setRandomPoster(poster);
   }, [UpcomingList]);
+
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }
+
+  if (loading) {
+    return (
+      <>
+        <p>Loading...</p>
+      </>
+    );
+  }
 
   return (
     <>

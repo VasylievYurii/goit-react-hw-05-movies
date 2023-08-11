@@ -22,7 +22,7 @@ const MOVIES_API = {
   nowPlaying: '/movie/now_playing',
 };
 
-const getTrendingMoviesList = async () => {
+export const getTrendingMoviesList = async () => {
   try {
     const result = await axios.get(MOVIES_API.trending, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -33,7 +33,7 @@ const getTrendingMoviesList = async () => {
   }
 };
 
-const getGenres = async () => {
+export const getGenres = async () => {
   try {
     const result = await axios.get(MOVIES_API.genres, {
       params: { api_key: API_KEY },
@@ -44,7 +44,7 @@ const getGenres = async () => {
   }
 };
 
-const getTopRated = async () => {
+export const getTopRated = async () => {
   try {
     const result = await axios.get(MOVIES_API.topRated, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -55,7 +55,7 @@ const getTopRated = async () => {
   }
 };
 
-const getPopular = async () => {
+export const getPopular = async () => {
   try {
     const result = await axios.get(MOVIES_API.popular, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -66,7 +66,7 @@ const getPopular = async () => {
   }
 };
 
-const getNowPlaying = async () => {
+export const getNowPlaying = async () => {
   try {
     const result = await axios.get(MOVIES_API.nowPlaying, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -88,7 +88,7 @@ export const getMoviesSearch = async (query, page) => {
   }
 };
 
-const getMoviesByGenre = async genre => {
+export const getMoviesByGenre = async genre => {
   try {
     const result = await axios.get(MOVIES_API.movieByGenre, {
       params: {
@@ -106,17 +106,3 @@ const getMoviesByGenre = async genre => {
     throw new Error(error.response.data.message);
   }
 };
-
-const useMoviesApi = () => {
-  return {
-    getTrendingMoviesList,
-    getGenres,
-    getMoviesByGenre,
-    getMoviesSearch,
-    getTopRated,
-    getPopular,
-    getNowPlaying,
-  };
-};
-
-export default useMoviesApi;

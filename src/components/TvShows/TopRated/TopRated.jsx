@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import useTvApi from 'services/tvAPI';
+import { getTvTopRated } from 'services/tvAPI';
 import Card from 'components/Card/Card';
-// import { useLocation } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 import Loading from 'components/Loading/Loading';
@@ -12,13 +10,11 @@ function TopRated() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [array, setArray] = useState([]);
-  // const location = useLocation();
 
-  const itemsForTrending = useTvApi();
   useEffect(() => {
     setLoading(true);
-    itemsForTrending
-      .getTvTopRated()
+
+    getTvTopRated()
       .then(({ results }) => {
         setArray(results);
       })

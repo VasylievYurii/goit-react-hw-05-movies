@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
-import useActorsApi from 'services/actorsAPI';
+import { getTrendingActorsList } from 'services/actorsAPI';
 import ActorCard from '../ActorCard/ActorCard';
 import { TrendingTitle, TrendingList } from './Trending.styled';
+import { toast } from 'react-toastify';
+import Loading from 'components/Loading/Loading';
+import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 
 function Trending() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [array, setArray] = useState([]);
 
-  const itemsForTrending = useActorsApi();
   useEffect(() => {
     setLoading(true);
-    itemsForTrending
-      .getTrendingActorsList()
+
+    getTrendingActorsList()
       .then(({ results }) => {
         setArray(results);
       })
@@ -25,13 +27,35 @@ function Trending() {
       });
   }, []);
 
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }
+
+  if (loading) {
+    return (
+      <>
+        <TitleTemplate>Trending persons...</TitleTemplate>
+        <Loading />
+      </>
+    );
+  }
+
   return (
     <div>
       <TrendingTitle>Trending persons</TrendingTitle>
       <TrendingList>
         {array.map(actor => {
           if (!actor['profile_path']) {
-            return;
+            return [];
           }
           return (
             <ActorCard

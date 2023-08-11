@@ -9,7 +9,7 @@ import {
   Span,
 } from './TvDetails.styled';
 import Button from 'components/Button/Button';
-import useTvDetailsApi from 'services/tvDetailsAPI';
+import { getTvDetails } from 'services/tvDetailsAPI';
 import { useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
@@ -18,13 +18,11 @@ import Loader from 'components/Loader/Loader';
 function TvDetails() {
   const [tv, setTv] = useState(null);
   const { movieId } = useParams();
-  const metodsForTvDetails = useTvDetailsApi();
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
-    metodsForTvDetails
-      .getTvDetails(movieId)
+    getTvDetails(movieId)
       .then(res => {
         setTv(res);
       })
@@ -32,7 +30,7 @@ function TvDetails() {
         console.log(err);
       })
       .finally(() => {});
-  }, []);
+  }, [movieId]);
 
   if (!tv) {
     return;

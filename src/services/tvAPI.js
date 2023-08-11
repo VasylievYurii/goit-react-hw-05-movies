@@ -18,7 +18,7 @@ const TV_API = {
   tvByGenre: '/discover/tv',
 };
 
-const getTvTrendingList = async () => {
+export const getTvTrendingList = async () => {
   try {
     const result = await axios.get(TV_API.trending, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -29,7 +29,7 @@ const getTvTrendingList = async () => {
   }
 };
 
-const getTvGenres = async () => {
+export const getTvGenres = async () => {
   try {
     const result = await axios.get(TV_API.genres, {
       params: { api_key: API_KEY },
@@ -40,7 +40,7 @@ const getTvGenres = async () => {
   }
 };
 
-const getTvTopRated = async () => {
+export const getTvTopRated = async () => {
   try {
     const result = await axios.get(TV_API.topRated, {
       params: { api_key: API_KEY, language: 'en-US' },
@@ -51,7 +51,7 @@ const getTvTopRated = async () => {
   }
 };
 
-const getTvSearch = async query => {
+export const getTvSearch = async query => {
   try {
     const result = await axios.get(TV_API.moviesSearch, {
       params: { query: { query }, api_key: API_KEY, language: 'en-US' },
@@ -62,7 +62,7 @@ const getTvSearch = async query => {
   }
 };
 
-const getTvByGenre = async genre => {
+export const getTvByGenre = async genre => {
   try {
     const result = await axios.get(TV_API.tvByGenre, {
       params: {
@@ -81,15 +81,3 @@ const getTvByGenre = async genre => {
     throw new Error(error.response.data.message);
   }
 };
-
-const useTvApi = () => {
-  return {
-    getTvTrendingList,
-    getTvGenres,
-    getTvTopRated,
-    getTvSearch,
-    getTvByGenre,
-  };
-};
-
-export default useTvApi;

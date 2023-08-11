@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useTvDetailsApi from 'services/tvDetailsAPI';
+import { getTvReviews } from 'services/tvDetailsAPI';
 import {
   Wrapper,
   ReviewsWrap,
@@ -14,36 +14,37 @@ import {
 } from './ReviewsTv.styled';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
+import { toast } from 'react-toastify';
 
 function ReviewsTv() {
+  const [error, setError] = useState(false);
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
-  const metodsForMovieDetails = useTvDetailsApi();
 
   useEffect(() => {
-    metodsForMovieDetails
-      .getTvReviews(movieId)
+    getTvReviews(movieId)
       .then(({ results }) => {
         setReviews(results);
       })
       .catch(err => {
         console.log(err);
+        setError(true);
       })
       .finally(() => {});
-  }, []);
+  }, [movieId]);
 
-  // if (error) {
-  //   toast.error('Sorry for the inconvenience! Try again later.', {
-  //     position: 'top-right',
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: 'colored',
-  //   });
-  // }
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }
 
   if (reviews.length === 0) {
     return (
