@@ -7,6 +7,9 @@ import {
   LinksWrap,
   Overview,
   Span,
+  ImageWrapper,
+  Poster,
+  NoPoster,
 } from './TvDetails.styled';
 import Button from 'components/Button/Button';
 import { getTvDetails } from 'services/tvDetailsAPI';
@@ -44,12 +47,22 @@ function TvDetails() {
         </Link>
         <Title>{tv?.name}</Title>
         <MainWrapper>
-          <div>
+          {/* <div>
             <img
               src={`http://image.tmdb.org/t/p/w300${tv['poster_path']}`}
               alt={tv?.name}
             />
-          </div>
+          </div> */}
+          <ImageWrapper>
+            {tv['poster_path'] ? (
+              <Poster
+                src={`http://image.tmdb.org/t/p/w300${tv['poster_path']}`}
+                alt={tv?.title}
+              />
+            ) : (
+              <NoPoster />
+            )}
+          </ImageWrapper>
           <MovieDetailsWrapper>
             <p>
               <Span>Rating:</Span> {tv['vote_average']}

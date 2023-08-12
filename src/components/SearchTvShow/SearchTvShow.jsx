@@ -4,7 +4,7 @@ import { getTvSearch } from 'services/tvAPI';
 import { toast } from 'react-toastify';
 import debounce from 'lodash.debounce';
 import Loading from 'components/Loading/Loading';
-import SearchingResults from 'components/SearchingResults/SearchingResults';
+import SearchingResultsTv from 'components/SearchingResultsTv/SearchingResultsTv';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 import {
   Form,
@@ -148,7 +148,7 @@ function SearchTvShow({ onSubmit }) {
 
       {tvShows.length > 0 ? (
         <>
-          <SearchingResults array={tvShows} />
+          <SearchingResultsTv array={tvShows} />
           {!loaderLoadMore ? (
             <BtnLoadMore onClick={handleLoadMore}>Load more</BtnLoadMore>
           ) : (

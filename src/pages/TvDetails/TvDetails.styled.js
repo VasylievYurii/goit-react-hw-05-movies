@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { TbMovie } from 'react-icons/tb';
 
 export const Title = styled.h2`
   color: #fe6d31;
@@ -50,4 +51,17 @@ export const LinksWrap = styled.ul`
   display: flex;
   gap: 20px;
   padding-bottom: 20px;
+`;
+
+export const ImageWrapper = styled.div`
+  min-width: 300px;
+  min-height: 450px;
+`;
+
+export const Poster = styled.img``;
+
+export const NoPoster = styled(TbMovie)`
+  width: 100%;
+  height: 100%;
+  stroke: white;
 `;

@@ -3,7 +3,7 @@ import ListTemplate from 'components/ListTemplate/ListTemplate';
 import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
 import NoFoundedTemplate from 'components/NoFoundedTemplate/NoFoundedTemplate';
 
-function SearchingResults({ array }) {
+function SearchingResultsTv({ array }) {
   if (array.length === 0) {
     return (
       <>
@@ -17,15 +17,15 @@ function SearchingResults({ array }) {
       <>
         <TitleTemplate>Searching results</TitleTemplate>
         <ListTemplate>
-          {array.map((movie, index) => (
+          {array.map((tv, index) => (
             <Card
-              key={`${movie.id}-${index}`}
-              movieId={movie.id}
-              title={movie.title || movie.name}
-              poster={movie['poster_path']}
+              key={`${tv.id}-${index}`}
+              movieId={tv.id}
+              title={tv.title || tv.name}
+              poster={tv['poster_path']}
               type={'tv'}
-              rating={movie['vote_average']}
-              date={movie['release_date']}
+              rating={tv['vote_average']}
+              date={tv['release_date']}
             />
           ))}
         </ListTemplate>
@@ -33,4 +33,4 @@ function SearchingResults({ array }) {
     );
   }
 }
-export default SearchingResults;
+export default SearchingResultsTv;
