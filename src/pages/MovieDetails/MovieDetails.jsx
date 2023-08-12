@@ -73,7 +73,7 @@ function MovieDetails() {
               </p>
             ) : null}
 
-            {movie['production_countries'][0] ? (
+            {movie['production_countries'] ? (
               <p>
                 <Span>Country:</Span> {movie['production_countries'][0].name}
               </p>
@@ -84,12 +84,13 @@ function MovieDetails() {
                 <Span>Budget:</Span> {movie.budget}
               </p>
             ) : null}
-            {movie['genres'] ? (
+
+            {movie['genres'] && movie['genres'].length > 0 ? (
               <p>
-                <Span>Genres:</Span> {movie['genres'][0].name}
+                <Span>Genres:</Span>{' '}
+                {movie['genres'].map(genre => genre.name).join(', ')}
               </p>
             ) : null}
-
             {movie.runtime ? (
               <p>
                 <Span>Runtime:</Span> {movie.runtime} min

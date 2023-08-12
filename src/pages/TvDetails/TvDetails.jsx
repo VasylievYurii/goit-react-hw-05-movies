@@ -70,9 +70,12 @@ function TvDetails() {
               <Span>Country:</Span> {tv['origin_country'][0]}
             </p>
 
-            <p>
-              <Span>Genres:</Span> {tv['genres'][0]?.name}
-            </p>
+            {tv['genres'] && tv['genres'].length > 0 ? (
+              <p>
+                <Span>Genres:</Span>{' '}
+                {tv['genres'].map(genre => genre.name).join(', ')}
+              </p>
+            ) : null}
 
             <Overview>{tv?.overview}</Overview>
           </MovieDetailsWrapper>
