@@ -12,21 +12,49 @@ import Card from 'components/Card/Card';
 import { BtnLoadMore } from 'components/SearchMovie/SearchMovie.styled';
 import { ThreeDots } from 'react-loader-spinner';
 import GenrePanel from 'components/Movies/GenrePanel/GenrePanel';
+import { getGenres } from 'services/moviesAPI';
+import { toast } from 'react-toastify';
 // import Loader from 'components/Loader/Loader';
 
 function MovieGenres() {
+  const [error, setError] = useState(false);
   const [movie, setMovie] = useState(null);
   const [page, setPage] = useState(1);
   const [prevGenre, setPrevGenre] = useState('');
+  const [array, setArray] = useState([]);
+  const [title, setTitle] = useState('');
   const { genre } = useParams();
   const [loaderLoadMore, setLoaderLoadMore] = useState(false);
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/');
+
   if (genre !== prevGenre) {
     setPage(1);
     setMovie(null);
     setPrevGenre(genre);
   }
+
+  useEffect(() => {
+    if (array.length > 0) {
+      const selectedGenre = array.find(ob => ob.id === parseInt(genre));
+      if (selectedGenre) {
+        setTitle(selectedGenre.name);
+      }
+    }
+  }, [array, genre]);
+
+  useEffect(() => {
+    getGenres()
+      .then(({ genres }) => {
+        setArray(genres);
+      })
+      .catch(err => {
+        setError(true);
+        console.log(err);
+      })
+      .finally(() => {});
+  }, []);
+
   useEffect(() => {
     getMoviesByGenre(genre, page)
       .then(({ results }) => {
@@ -52,6 +80,19 @@ function MovieGenres() {
   if (!movie) {
     return;
   }
+
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }
   return (
     <>
       <GenrePanel />
@@ -61,7 +102,7 @@ function MovieGenres() {
         </Link>
       </SectionTemplate>
       <SectionTemplate>
-        {/* <TitleTemplate title={}/> */}
+        <TitleTemplate>{title}</TitleTemplate>
         <ListTemplate>
           {movie.map((movie, index) => (
             <Card

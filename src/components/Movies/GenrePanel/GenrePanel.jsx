@@ -50,15 +50,20 @@ function GenrePanel() {
   return (
     <>
       <GenreList>
-        {array.map(({ id, name }) => (
-          <GenreName
-            key={id}
-            to={`/movies/genres/${id}`}
-            state={{ from: location }}
-          >
-            {name}
-          </GenreName>
-        ))}
+        {array.map(({ id, name }) => {
+          const randomDate = new Date(
+            +new Date() - Math.floor(Math.random() * 10000000000)
+          );
+          return (
+            <GenreName
+              key={id * randomDate.getTime()}
+              to={`/movies/genres/${id}`}
+              state={{ from: location }}
+            >
+              {name}
+            </GenreName>
+          );
+        })}
       </GenreList>
     </>
   );
