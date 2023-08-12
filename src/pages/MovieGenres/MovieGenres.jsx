@@ -11,16 +11,22 @@ import ListTemplate from 'components/ListTemplate/ListTemplate';
 import Card from 'components/Card/Card';
 import { BtnLoadMore } from 'components/SearchMovie/SearchMovie.styled';
 import { ThreeDots } from 'react-loader-spinner';
+import GenrePanel from 'components/Movies/GenrePanel/GenrePanel';
 // import Loader from 'components/Loader/Loader';
 
 function MovieGenres() {
   const [movie, setMovie] = useState(null);
   const [page, setPage] = useState(1);
+  const [prevGenre, setPrevGenre] = useState('');
   const { genre } = useParams();
   const [loaderLoadMore, setLoaderLoadMore] = useState(false);
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/');
-
+  if (genre !== prevGenre) {
+    setPage(1);
+    setMovie(null);
+    setPrevGenre(genre);
+  }
   useEffect(() => {
     getMoviesByGenre(genre, page)
       .then(({ results }) => {
@@ -38,17 +44,17 @@ function MovieGenres() {
       });
   }, [genre, page]);
 
-  if (!movie) {
-    return;
-  }
-
   const handleLoadMore = () => {
     setLoaderLoadMore(true);
     setPage(prevPage => prevPage + 1);
   };
 
+  if (!movie) {
+    return;
+  }
   return (
     <>
+      <GenrePanel />
       <SectionTemplate>
         <Link to={backLinkHref.current}>
           <Button>Go Back</Button>
@@ -57,9 +63,9 @@ function MovieGenres() {
       <SectionTemplate>
         {/* <TitleTemplate title={}/> */}
         <ListTemplate>
-          {movie.map(movie => (
+          {movie.map((movie, index) => (
             <Card
-              key={movie.id}
+              key={movie.id - index}
               movieId={movie.id}
               title={movie.title || movie.name}
               poster={movie['poster_path']}
