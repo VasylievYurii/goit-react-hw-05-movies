@@ -1,99 +1,143 @@
-import { useState, useEffect, Suspense } from 'react';
-import { Outlet, useParams, Link } from 'react-router-dom';
-import {
-  Title,
-  MainWrapper,
-  MovieDetailsWrapper,
-  LinksWrap,
-  Overview,
-  Span,
-} from './TvGenres.styled';
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+// import {} from './MovieGenres.styled';
+import { getTvByGenre } from 'services/tvAPI';
 import Button from 'components/Button/Button';
-import { getTvDetails } from 'services/tvDetailsAPI';
 import { useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
-import Loader from 'components/Loader/Loader';
+import TitleTemplate from 'components/TitleTemplate/TitleTemplate';
+import ListTemplate from 'components/ListTemplate/ListTemplate';
+import Card from 'components/Card/Card';
+import { BtnLoadMore } from 'components/SearchTvShow/SearchTvShow.styled';
+import { ThreeDots } from 'react-loader-spinner';
+import GenrePanel from 'components/TvShows/GenrePanel/GenrePanel';
+import { getTvGenres } from 'services/tvAPI';
+import { toast } from 'react-toastify';
+// import Loader from 'components/Loader/Loader';
 
 function TvGenres() {
-  const [tv, setTv] = useState(null);
-  const { movieId } = useParams();
+  const [error, setError] = useState(false);
+  const [movie, setMovie] = useState(null);
+  const [page, setPage] = useState(1);
+  const [prevGenre, setPrevGenre] = useState('');
+  const [array, setArray] = useState([]);
+  const [title, setTitle] = useState('');
+  const { genre } = useParams();
+  const [loaderLoadMore, setLoaderLoadMore] = useState(false);
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/');
 
+  if (genre !== prevGenre) {
+    setPage(1);
+    setMovie(null);
+    setPrevGenre(genre);
+  }
+
   useEffect(() => {
-    getTvDetails(movieId)
-      .then(res => {
-        setTv(res);
+    if (array.length > 0) {
+      const selectedGenre = array.find(ob => ob.id === parseInt(genre));
+      if (selectedGenre) {
+        setTitle(selectedGenre.name);
+      }
+    }
+  }, [array, genre]);
+
+  useEffect(() => {
+    getTvGenres()
+      .then(({ genres }) => {
+        setArray(genres);
+      })
+      .catch(err => {
+        setError(true);
+        console.log(err);
+      })
+      .finally(() => {});
+  }, []);
+
+  useEffect(() => {
+    getTvByGenre(genre, page)
+      .then(({ results }) => {
+        if (page === 1) {
+          setMovie(results);
+        } else {
+          setMovie(prevMovies => [...prevMovies, ...results]);
+        }
       })
       .catch(err => {
         console.log(err);
       })
-      .finally(() => {});
-  }, [movieId]);
+      .finally(() => {
+        setLoaderLoadMore(false);
+      });
+  }, [genre, page]);
 
-  if (!tv) {
+  const handleLoadMore = () => {
+    setLoaderLoadMore(true);
+    setPage(prevPage => prevPage + 1);
+  };
+
+  if (!movie) {
     return;
   }
 
+  if (error) {
+    toast.error('Sorry for the inconvenience! Try again later.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }
   return (
     <>
+      <GenrePanel />
       <SectionTemplate>
         <Link to={backLinkHref.current}>
           <Button>Go Back</Button>
         </Link>
-        <Title>{tv?.name}</Title>
-        <MainWrapper>
-          <div>
-            <img
-              src={`http://image.tmdb.org/t/p/w300${tv['poster_path']}`}
-              alt={tv?.name}
-            />
-          </div>
-          <MovieDetailsWrapper>
-            <p>
-              <Span>Rating:</Span> {tv['vote_average']}
-            </p>
-            <p>
-              <Span>First air date:</Span> {tv['first_air_date']}
-            </p>
-            <p>
-              <Span>Last air date:</Span> {tv['last_air_date']}
-            </p>
-            <p>
-              <Span>Number of seasons:</Span> {tv?.number_of_seasons}
-            </p>
-            <p>
-              <Span>Number of episodes:</Span> {tv?.number_of_episodes}
-            </p>
-            <p>
-              <Span>Country:</Span> {tv['origin_country'][0]}
-            </p>
-
-            <p>
-              <Span>Genres:</Span> {tv['genres'][0]?.name}
-            </p>
-
-            <Overview>{tv?.overview}</Overview>
-          </MovieDetailsWrapper>
-        </MainWrapper>
       </SectionTemplate>
       <SectionTemplate>
-        <LinksWrap>
-          <li>
-            <Link to="cast">
-              <Button>Cast</Button>
-            </Link>
-          </li>
-          <li>
-            <Link to="reviews">
-              <Button>Reviews</Button>
-            </Link>
-          </li>
-        </LinksWrap>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
+        <TitleTemplate>{title}</TitleTemplate>
+        <ListTemplate>
+          {movie.map((movie, index) => (
+            <Card
+              key={movie.id - index}
+              movieId={movie.id}
+              title={movie.title || movie.name}
+              poster={movie['poster_path']}
+              type={'tv'}
+              rating={movie['vote_average']}
+              date={movie['release_date']}
+            />
+          ))}
+        </ListTemplate>
+        {!loaderLoadMore ? (
+          <BtnLoadMore onClick={handleLoadMore}>Load more</BtnLoadMore>
+        ) : (
+          <BtnLoadMore>
+            <ThreeDots
+              height="50"
+              width="50"
+              radius="9"
+              color="#fe6d31"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{
+                justifyContent: 'center',
+                position: 'absolute',
+                top: '0',
+                left: '50%',
+                transform: 'translateX(-50%)',
+              }}
+              wrapperClassName=""
+              visible={true}
+            />
+          </BtnLoadMore>
+        )}
       </SectionTemplate>
     </>
   );

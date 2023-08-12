@@ -62,7 +62,7 @@ export const getTvSearch = async (query, page) => {
   }
 };
 
-export const getTvByGenre = async genre => {
+export const getTvByGenre = async (genre, page) => {
   try {
     const result = await axios.get(TV_API.tvByGenre, {
       params: {
@@ -71,9 +71,9 @@ export const getTvByGenre = async genre => {
         api_key: API_KEY,
         include_video: false,
         language: 'en-US',
-        page: 1,
+        page,
         sort_by: 'popularity.desc',
-        with_genres: { genre },
+        with_genres: genre,
       },
     });
     return result.data;

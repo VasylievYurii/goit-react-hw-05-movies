@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { getTvGenres } from 'services/tvAPI';
 import { GenreList, GenreName } from './GenrePanel.styled';
 import { toast } from 'react-toastify';
+import { useLocation } from 'react-router-dom';
 
 function GenrePanel() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [array, setArray] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     setLoading(true);
@@ -48,9 +50,20 @@ function GenrePanel() {
   return (
     <>
       <GenreList>
-        {array.map(genre => (
-          <GenreName key={genre.id}>{genre.name}</GenreName>
-        ))}
+        {array.map(({ id, name }) => {
+          const randomDate = new Date(
+            +new Date() - Math.floor(Math.random() * 10000000000)
+          );
+          return (
+            <GenreName
+              key={id * randomDate.getTime()}
+              to={`/tv/genres/${id}`}
+              state={{ from: location }}
+            >
+              {name}
+            </GenreName>
+          );
+        })}
       </GenreList>
     </>
   );
