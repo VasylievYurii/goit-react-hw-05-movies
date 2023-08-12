@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/goit-react-hw-05-movies/static/css/main.fd7ce878.css",
-    "main.js": "/goit-react-hw-05-movies/static/js/main.75215f64.js",
+    "main.js": "/goit-react-hw-05-movies/static/js/main.bc89d3e6.js",
     "static/js/857.1c78c5d2.chunk.js": "/goit-react-hw-05-movies/static/js/857.1c78c5d2.chunk.js",
     "static/js/47.d40b6db4.chunk.js": "/goit-react-hw-05-movies/static/js/47.d40b6db4.chunk.js",
     "static/js/402.77a62854.chunk.js": "/goit-react-hw-05-movies/static/js/402.77a62854.chunk.js",
@@ -16,7 +16,7 @@
     "static/media/Poppins-Bold.ttf": "/goit-react-hw-05-movies/static/media/Poppins-Bold.cdb29a5d7ccf57ff05a3.ttf",
     "index.html": "/goit-react-hw-05-movies/index.html",
     "main.fd7ce878.css.map": "/goit-react-hw-05-movies/static/css/main.fd7ce878.css.map",
-    "main.75215f64.js.map": "/goit-react-hw-05-movies/static/js/main.75215f64.js.map",
+    "main.bc89d3e6.js.map": "/goit-react-hw-05-movies/static/js/main.bc89d3e6.js.map",
     "857.1c78c5d2.chunk.js.map": "/goit-react-hw-05-movies/static/js/857.1c78c5d2.chunk.js.map",
     "47.d40b6db4.chunk.js.map": "/goit-react-hw-05-movies/static/js/47.d40b6db4.chunk.js.map",
     "402.77a62854.chunk.js.map": "/goit-react-hw-05-movies/static/js/402.77a62854.chunk.js.map",
@@ -28,6 +28,6 @@
   },
   "entrypoints": [
     "static/css/main.fd7ce878.css",
-    "static/js/main.75215f64.js"
+    "static/js/main.bc89d3e6.js"
   ]
 }
