@@ -88,7 +88,8 @@ export const getMoviesSearch = async (query, page) => {
   }
 };
 
-export const getMoviesByGenre = async genre => {
+export const getMoviesByGenre = async (genre, page) => {
+  console.log('genre:', genre);
   try {
     const result = await axios.get(MOVIES_API.movieByGenre, {
       params: {
@@ -96,9 +97,9 @@ export const getMoviesByGenre = async genre => {
         api_key: API_KEY,
         include_video: false,
         language: 'en-US',
-        page: 1,
+        page,
         sort_by: 'popularity.desc',
-        with_genres: { genre },
+        with_genres: genre,
       },
     });
     return result.data;

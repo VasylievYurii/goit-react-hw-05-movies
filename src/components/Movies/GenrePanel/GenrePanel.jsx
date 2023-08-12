@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { getGenres } from 'services/moviesAPI';
 import { GenreList, GenreName } from './GenrePanel.styled';
 import { toast } from 'react-toastify';
+import { useLocation } from 'react-router-dom';
 
 function GenrePanel() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [array, setArray] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     setLoading(true);
@@ -48,8 +50,14 @@ function GenrePanel() {
   return (
     <>
       <GenreList>
-        {array.map(genre => (
-          <GenreName key={genre.id}>{genre.name}</GenreName>
+        {array.map(({ id, name }) => (
+          <GenreName
+            key={id}
+            to={`/movies/genres/${id}`}
+            state={{ from: location }}
+          >
+            {name}
+          </GenreName>
         ))}
       </GenreList>
     </>

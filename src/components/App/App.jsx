@@ -14,7 +14,9 @@ const Movies = lazy(() => import('pages/Movies'));
 const TvShows = lazy(() => import('pages/TvShows'));
 const Actors = lazy(() => import('pages/Actors'));
 const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
+const MovieGenres = lazy(() => import('pages/MovieGenres/MovieGenres'));
 const TvDetails = lazy(() => import('pages/TvDetails/TvDetails'));
+const TvGenres = lazy(() => import('pages/TvGenres/TvGenres'));
 
 function App() {
   return (
@@ -41,6 +43,16 @@ function App() {
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
+
+        <Route
+          path="movies/genres/:genre"
+          element={
+            <Suspense fallback={<Loader />}>
+              <MovieGenres />
+            </Suspense>
+          }
+        ></Route>
+
         <Route
           path="tvshows"
           element={
@@ -61,6 +73,15 @@ function App() {
           <Route path="cast" element={<CastTv />} />
           <Route path="reviews" element={<ReviewsTv />} />
         </Route>
+
+        <Route
+          path="tv/genres/:genre"
+          element={
+            <Suspense fallback={<Loader />}>
+              <TvGenres />
+            </Suspense>
+          }
+        ></Route>
 
         <Route
           path="actors"
