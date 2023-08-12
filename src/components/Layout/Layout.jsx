@@ -10,9 +10,11 @@ import {
   Menu,
   List,
   Container,
+  ScrollUp,
 } from './Layout.styled';
 import { Suspense } from 'react';
 import Loader from 'components/Loader/Loader';
+import ScrollToTop from 'react-scroll-up';
 
 function Layout() {
   return (
@@ -29,6 +31,7 @@ function Layout() {
         pauseOnHover
         theme="colored"
       />
+
       <Header>
         <Container>
           <Nav>
@@ -50,6 +53,9 @@ function Layout() {
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
+        <ScrollToTop showUnder={160}>
+          <ScrollUp />
+        </ScrollToTop>
       </main>
     </>
   );

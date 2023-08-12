@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Link, NavLink } from 'react-router-dom';
+import { HiArrowCircleUp } from 'react-icons/hi';
 
 export const Section = styled.section`
   padding-top: 20px;
@@ -69,5 +70,15 @@ export const Container = styled.div`
     max-width: 1440px;
     padding-left: 32px;
     padding-right: 32px;
+  }
+`;
+
+export const ScrollUp = styled(HiArrowCircleUp)`
+  width: 50px;
+  height: 50px;
+  fill: white;
+  transition: fill 0.3s ease;
+  &:hover {
+    fill: #fe6d31;
   }
 `;
