@@ -18,6 +18,7 @@ import { useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 import Loader from 'components/Loader/Loader';
+import { motion } from 'framer-motion';
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
@@ -42,7 +43,11 @@ function MovieDetails() {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <SectionTemplate>
         <Link to={backLinkHref.current}>
           <Button>Go Back</Button>
@@ -118,7 +123,7 @@ function MovieDetails() {
           <Outlet />
         </Suspense>
       </SectionTemplate>
-    </>
+    </motion.div>
   );
 }
 export default MovieDetails;

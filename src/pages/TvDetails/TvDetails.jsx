@@ -17,6 +17,7 @@ import { useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import SectionTemplate from 'components/SectionTemplate/SectionTemplate';
 import Loader from 'components/Loader/Loader';
+import { motion } from 'framer-motion';
 
 function TvDetails() {
   const [tv, setTv] = useState(null);
@@ -40,7 +41,11 @@ function TvDetails() {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <SectionTemplate>
         <Link to={backLinkHref.current}>
           <Button>Go Back</Button>
@@ -111,7 +116,7 @@ function TvDetails() {
           <Outlet />
         </Suspense>
       </SectionTemplate>
-    </>
+    </motion.div>
   );
 }
 export default TvDetails;

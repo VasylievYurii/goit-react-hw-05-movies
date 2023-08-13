@@ -14,6 +14,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import GenrePanel from 'components/Movies/GenrePanel/GenrePanel';
 import { getGenres } from 'services/moviesAPI';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 // import Loader from 'components/Loader/Loader';
 
 function MovieGenres() {
@@ -94,7 +95,11 @@ function MovieGenres() {
     });
   }
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <GenrePanel />
       <SectionTemplate>
         <Link to={backLinkHref.current}>
@@ -139,7 +144,7 @@ function MovieGenres() {
           </BtnLoadMore>
         )}
       </SectionTemplate>
-    </>
+    </motion.div>
   );
 }
 export default MovieGenres;

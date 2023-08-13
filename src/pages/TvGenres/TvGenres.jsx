@@ -14,6 +14,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import GenrePanel from 'components/TvShows/GenrePanel/GenrePanel';
 import { getTvGenres } from 'services/tvAPI';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 // import Loader from 'components/Loader/Loader';
 
 function TvGenres() {
@@ -94,7 +95,11 @@ function TvGenres() {
     });
   }
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <GenrePanel />
       <SectionTemplate>
         <Link to={backLinkHref.current}>
@@ -139,7 +144,7 @@ function TvGenres() {
           </BtnLoadMore>
         )}
       </SectionTemplate>
-    </>
+    </motion.div>
   );
 }
 export default TvGenres;
