@@ -1,7 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 import { lazy, Suspense } from 'react';
-import { useLocation } from 'react-router-dom';
 import Home from 'pages/Home';
 import Layout from '../Layout/Layout';
 import Cast from 'components/Cast/Cast';
@@ -10,7 +9,6 @@ import CastTv from 'components/CastTv/CastTv';
 import ReviewsTv from 'components/ReviewsTv/ReviewsTv';
 import { AnimatePresence } from 'framer-motion';
 
-// const Home = lazy(() => import('pages/Home/Home'));
 const Movies = lazy(() => import('pages/Movies'));
 const TvShows = lazy(() => import('pages/TvShows'));
 const Actors = lazy(() => import('pages/Actors'));

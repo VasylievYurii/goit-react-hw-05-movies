@@ -19,6 +19,12 @@ export const MainWrapper = styled.div`
   display: flex;
   gap: 20px;
   position: relative;
+  flex-direction: column;
+
+  @media screen and (min-width: 860px) {
+    flex-direction: row;
+  }
+
   &::after {
     content: '';
     position: absolute;
